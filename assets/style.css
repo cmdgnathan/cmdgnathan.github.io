@@ -1,0 +1,244 @@
+/* ============================================
+   minimal academic — inspired by ycliu93.github.io
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 1.7;
+  color: #555;
+  background: #fff;
+  -webkit-font-smoothing: antialiased;
+}
+
+img, svg { max-width: 100%; display: block; }
+
+a {
+  color: #2874a6;
+  text-decoration: none;
+  word-wrap: break-word;
+  transition: color .15s;
+}
+a:hover { color: #7b7b7b; }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: inherit;
+  font-weight: 700;
+  color: #333;
+  letter-spacing: -0.005em;
+}
+
+h1 { font-size: 30px; margin: 18px 0 18px; }
+h2 { font-size: 22px; margin: 56px 0 6px; }
+h4 { font-size: 16px; margin: 0 0 6px; line-height: 1.45; }
+
+p { margin: 0 0 1em; }
+
+/* ---------- top navbar ---------- */
+.navbar {
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  padding: 14px 24px;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #555;
+}
+
+.wrap {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 36px 24px 80px;
+}
+
+/* ---------- hero ---------- */
+.hero { text-align: center; margin-bottom: 28px; }
+.hero .avatar {
+  width: 150px; height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: 25% 55%;
+  margin: 0 auto;
+  background: #f4f4f4;
+}
+.hero h1 { margin: 18px 0 16px; }
+.hero .bio {
+  text-align: left;
+  max-width: 720px;
+  margin: 0 auto;
+}
+.hero .bio p { margin-bottom: 14px; }
+.hero .links {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+  color: #888;
+}
+.hero .links a { color: #2874a6; }
+.hero .email {
+  text-align: center;
+  margin-top: 4px;
+  font-size: 14px;
+  color: #777;
+}
+
+/* ---------- section rule ---------- */
+.section-rule {
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin: 12px 0;
+}
+
+/* ---------- entry rows ---------- */
+.entry {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 28px;
+  margin: 32px 0;
+  align-items: center;
+}
+
+.entry .thumb {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: #f4f6f9;
+  display: block;
+  border: 1px solid #eee;
+}
+.entry .thumb img,
+.entry .thumb svg {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #fff;
+}
+
+/* Dark variant for diagram-style SVG thumbs */
+.entry .thumb.dark { background: #0e0e0e; border-color: #0e0e0e; }
+.entry .thumb.dark img,
+.entry .thumb.dark svg { background: transparent; }
+
+/* Venue fallback shown behind the image; revealed when img.onerror hides the img */
+.entry .thumb-venue {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #2874a6;
+  font-weight: 700;
+  font-size: 17px;
+  letter-spacing: 0.04em;
+  text-align: center;
+  z-index: 0;
+}
+
+/* Video posters: full-bleed crop + play overlay */
+.entry .thumb.video img { object-fit: cover; }
+.entry .thumb.video::after {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  z-index: 2;
+  width: 50px; height: 50px;
+  transform: translate(-50%, -50%);
+  background: rgba(0,0,0,0.7);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.entry .thumb.video::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  z-index: 3;
+  width: 0; height: 0;
+  margin-left: 3px;
+  transform: translate(-50%, -50%);
+  border: 8px solid transparent;
+  border-left: 13px solid #fff;
+  pointer-events: none;
+}
+
+.entry .body { min-width: 0; }
+.entry h4 { margin: 0 0 4px; }
+
+.entry .meta {
+  font-size: 13px;
+  color: #888;
+  margin: 0 0 4px;
+}
+.entry .meta .venue {
+  color: #2874a6;
+  font-weight: 700;
+}
+
+.entry .authors {
+  font-size: 13px;
+  color: #777;
+  margin: 0 0 6px;
+}
+.entry .authors b { color: #555; }
+
+.entry .pitch {
+  margin: 6px 0 8px;
+  color: #555;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.entry .links { font-size: 13px; color: #888; }
+.entry .links a {
+  color: #2874a6;
+  margin-right: 2px;
+}
+.entry .links a::before { content: '['; color: #888; margin-right: 1px; }
+.entry .links a::after  { content: ']'; color: #888; margin-left: 1px; }
+
+@media (max-width: 720px) {
+  .entry { grid-template-columns: 1fr; gap: 14px; }
+  .entry .thumb { max-width: 320px; margin: 0 auto; }
+}
+
+/* ---------- employment ---------- */
+.job {
+  margin: 24px 0;
+  padding-left: 0;
+}
+.job h4 {
+  margin: 0 0 2px;
+  font-size: 16px;
+}
+.job .role { font-weight: 400; color: #555; }
+.job .when {
+  display: block;
+  font-size: 13px;
+  color: #888;
+  margin-bottom: 6px;
+}
+.job p {
+  margin: 0;
+  font-size: 14px;
+  color: #555;
+  line-height: 1.65;
+}
+
+/* ---------- footer ---------- */
+footer {
+  text-align: center;
+  margin-top: 80px;
+  padding-top: 22px;
+  border-top: 1px solid #eee;
+  font-size: 13px;
+  color: #888;
+}
+footer a { color: #888; }
