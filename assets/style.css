@@ -38,6 +38,28 @@ h1 { font-size: 30px; margin: 18px 0 18px; }
 h2 { font-size: 22px; margin: 56px 0 6px; }
 h4 { font-size: 16px; margin: 0 0 6px; line-height: 1.45; }
 
+/* collapsible sections — summary styled like an h2 */
+details.section { margin: 0; }
+details.section > summary {
+  font-family: inherit;
+  font-size: 22px;
+  font-weight: 700;
+  color: #333;
+  margin: 56px 0 6px;
+  padding: 4px 0;
+  cursor: pointer;
+  outline: none;
+  list-style: revert;
+}
+details.section > summary:hover,
+details.section[open] > summary { color: #2874a6; }
+details.section > summary .count {
+  color: #888;
+  font-weight: 400;
+  font-size: 15px;
+  margin-left: 6px;
+}
+
 p { margin: 0 0 1em; }
 
 /* ---------- top navbar ---------- */
