@@ -109,8 +109,18 @@ p { margin: 0 0 1em; }
 .hero .bio-row .bio-gif {
   flex: 0 0 300px;
   width: 300px;
+  aspect-ratio: 16 / 9;
+  background-image: url('img/traptic-pick-poster.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   border-radius: 8px;
   margin-top: 4px;
+}
+@media (hover: hover) {
+  .hero .bio-row .bio-gif:hover {
+    background-image: url('img/traptic-pick.gif');
+  }
 }
 @media (max-width: 760px) {
   .hero .bio-row { flex-direction: column; gap: 16px; }
