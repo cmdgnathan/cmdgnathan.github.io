@@ -98,38 +98,29 @@ p { margin: 0 0 1em; }
 }
 .hero .bio p { margin-bottom: 14px; }
 
-.hero .bio-row {
-  display: flex;
-  gap: 28px;
-  align-items: flex-start;
-  max-width: 1040px;
-  margin: 0 auto;
+.hero .bio-gifs {
+  margin: 22px auto 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  text-align: left;
 }
-.hero .bio-row .bio { margin: 0; max-width: none; flex: 1 1 auto; min-width: 0; }
-.hero .bio-row .bio-gif {
-  flex: 0 0 300px;
-  width: 300px;
+.hero .bio-gif {
+  width: 100%;
   aspect-ratio: 16 / 9;
-  background-image: url('img/traptic-pick-poster.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   border-radius: 8px;
-  margin-top: 4px;
 }
+.hero .bio-gif.bowery  { background-image: url('img/bowery-farm-poster.jpg'); }
+.hero .bio-gif.traptic { background-image: url('img/traptic-pick-poster.jpg'); }
 @media (hover: hover) {
-  .hero .bio-row .bio-gif:hover {
-    background-image: url('img/traptic-pick.gif');
-  }
+  .hero .bio-gif.bowery:hover  { background-image: url('img/bowery-farm.gif'); }
+  .hero .bio-gif.traptic:hover { background-image: url('img/traptic-pick.gif'); }
 }
-@media (max-width: 760px) {
-  .hero .bio-row { flex-direction: column; gap: 16px; }
-  .hero .bio-row .bio-gif {
-    flex: 0 0 auto;
-    width: 100%;
-    max-width: 320px;
-    margin: 4px auto 0;
-  }
+@media (max-width: 720px) {
+  .hero .bio-gifs { grid-template-columns: 1fr; max-width: 320px; gap: 12px; }
 }
 .hero .links {
   text-align: center;
