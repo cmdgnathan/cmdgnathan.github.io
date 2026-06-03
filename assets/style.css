@@ -97,6 +97,16 @@ p { margin: 0 0 1em; }
   margin: 0 auto;
 }
 .hero .bio p { margin-bottom: 14px; }
+.hero .bio h3 {
+  font-size: 13px;
+  font-weight: 700;
+  color: #555;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin: 30px 0 8px;
+}
+.hero .bio h3:first-child { margin-top: 6px; }
+.hero .bio .bio-gifs { margin: 18px 0 6px; }
 
 .hero .bio-gifs {
   margin: 22px auto 0;
