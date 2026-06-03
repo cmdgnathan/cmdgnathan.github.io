@@ -116,7 +116,7 @@ p { margin: 0 0 1em; }
 .hero .timeline-axis,
 .hero .timeline-row {
   display: grid;
-  grid-template-columns: 110px repeat(15, 1fr);
+  grid-template-columns: 110px repeat(60, 1fr);
   align-items: center;
 }
 .hero .timeline-axis {
@@ -156,16 +156,16 @@ p { margin: 0 0 1em; }
 
 @media (max-width: 600px) {
   .hero .timeline-axis,
-  .hero .timeline-row { grid-template-columns: 70px repeat(15, 1fr); }
+  .hero .timeline-row { grid-template-columns: 70px repeat(60, 1fr); }
   .hero .timeline-row .row-label { font-size: 10px; padding-right: 6px; }
   .hero .timeline-axis .axis-year { font-size: 9px; }
 }
 
 .hero .bio-gifs {
   margin: 22px auto 0;
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 16px;
-  justify-content: center;
   text-align: left;
 }
 .hero .bio-gifs figure { margin: 0; }
@@ -177,7 +177,6 @@ p { margin: 0 0 1em; }
   text-align: center;
   line-height: 1.4;
 }
-.hero .bio-gifs--pair figure { flex: 0 0 calc((100% - 16px) / 3); }
 
 .hero .bio-gif-wide {
   margin: 22px auto 6px;
@@ -195,10 +194,12 @@ p { margin: 0 0 1em; }
 }
 .hero .bio-gif.bowery  { background-image: url('img/bowery-farm-poster.jpg'); }
 .hero .bio-gif.traptic { background-image: url('img/traptic-pick-poster.jpg'); }
+.hero .bio-gif.reach   { background-image: url('img/reachability-poster.jpg'); }
 .hero .bio-gif.airsim  { aspect-ratio: 600 / 348; background-image: url('img/airsim-map-poster.jpg'); }
 @media (hover: hover) {
   .hero .bio-gif.bowery:hover  { background-image: url('img/bowery-farm.gif'); }
   .hero .bio-gif.traptic:hover { background-image: url('img/traptic-pick.gif'); }
+  .hero .bio-gif.reach:hover   { background-image: url('img/reachability.gif'); }
   .hero .bio-gif.airsim:hover  { background-image: url('img/airsim-map.gif'); }
 }
 /* Click-to-toggle: .pinned-play forces gif, .pinned-pause forces poster (beats hover) */
@@ -207,6 +208,8 @@ p { margin: 0 0 1em; }
 .hero .bio-gif.bowery.pinned-pause  { background-image: url('img/bowery-farm-poster.jpg'); }
 .hero .bio-gif.traptic.pinned-play  { background-image: url('img/traptic-pick.gif'); }
 .hero .bio-gif.traptic.pinned-pause { background-image: url('img/traptic-pick-poster.jpg'); }
+.hero .bio-gif.reach.pinned-play    { background-image: url('img/reachability.gif'); }
+.hero .bio-gif.reach.pinned-pause   { background-image: url('img/reachability-poster.jpg'); }
 .hero .bio-gif.airsim.pinned-play   { background-image: url('img/airsim-map.gif'); }
 .hero .bio-gif.airsim.pinned-pause  { background-image: url('img/airsim-map-poster.jpg'); }
 @media (max-width: 720px) {
