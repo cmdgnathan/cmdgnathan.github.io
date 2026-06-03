@@ -145,19 +145,36 @@ p { margin: 0 0 1em; }
   line-height: 18px;
 }
 .hero .timeline-row .bar {
-  height: 16px;
+  height: 18px;
   border-radius: 3px;
   cursor: default;
   transition: filter .15s;
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 18px;
+  color: white;
+  padding: 0 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  letter-spacing: 0.02em;
 }
-.hero .timeline-row .bar:hover { filter: brightness(1.1); }
-.hero .timeline-row .bar.academic { background: #2874a6; }
-.hero .timeline-row .bar.work     { background: #c0392b; }
+.hero .timeline-row .bar:hover { filter: brightness(1.15); }
+
+/* Per-org brand colors */
+.hero .timeline-row .bar.tamu     { background: #500000; }                    /* Aggie maroon */
+.hero .timeline-row .bar.gatech   { background: #b3a369; color: #2a2a2a; }    /* Tech gold */
+.hero .timeline-row .bar.lockheed { background: #0f234d; }                    /* Lockheed navy */
+.hero .timeline-row .bar.swri     { background: #003f87; }                    /* SwRI blue */
+.hero .timeline-row .bar.rdex     { background: #4a5568; }                    /* placeholder gray */
+.hero .timeline-row .bar.merl     { background: #d2232a; }                    /* Mitsubishi red */
+.hero .timeline-row .bar.traptic  { background: #3a7d4e; }                    /* dark green */
+.hero .timeline-row .bar.bowery   { background: #79b463; color: #1a2e1a; }    /* leafy green */
+.hero .timeline-row .bar.zoox     { background: #f66e0f; }                    /* Zoox orange */
 .hero .timeline-row .row-counter {
   grid-column: -2 / -1;
   font-size: 11px;
   font-weight: 700;
-  color: #c0392b;
+  color: #555;
   text-align: right;
   padding-left: 8px;
   font-variant-numeric: tabular-nums;
