@@ -148,6 +148,14 @@ p { margin: 0 0 1em; }
   .hero .bio-gif.traptic:hover { background-image: url('img/traptic-pick.gif'); }
   .hero .bio-gif.airsim:hover  { background-image: url('img/airsim-map.gif'); }
 }
+/* Click-to-toggle: .pinned-play forces gif, .pinned-pause forces poster (beats hover) */
+.bio-gif { cursor: pointer; }
+.hero .bio-gif.bowery.pinned-play   { background-image: url('img/bowery-farm.gif'); }
+.hero .bio-gif.bowery.pinned-pause  { background-image: url('img/bowery-farm-poster.jpg'); }
+.hero .bio-gif.traptic.pinned-play  { background-image: url('img/traptic-pick.gif'); }
+.hero .bio-gif.traptic.pinned-pause { background-image: url('img/traptic-pick-poster.jpg'); }
+.hero .bio-gif.airsim.pinned-play   { background-image: url('img/airsim-map.gif'); }
+.hero .bio-gif.airsim.pinned-pause  { background-image: url('img/airsim-map-poster.jpg'); }
 @media (max-width: 720px) {
   .hero .bio-gifs { flex-direction: column; max-width: 320px; gap: 12px; }
   .hero .bio-gifs--pair figure { flex: 0 0 auto; width: 100%; }

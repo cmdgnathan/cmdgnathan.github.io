@@ -370,6 +370,20 @@
       <a href="https://github.com/cmdgnathan/cmdgnathan.github.io">source</a>
     </footer>
 
+    <script>
+      // Click any hero gif to toggle pinned play/pause (overrides hover)
+      document.querySelectorAll('.bio-gif').forEach(function (el) {
+        el.addEventListener('click', function () {
+          if (el.classList.contains('pinned-play')) {
+            el.classList.replace('pinned-play', 'pinned-pause');
+          } else {
+            el.classList.remove('pinned-pause');
+            el.classList.add('pinned-play');
+          }
+        });
+      });
+    </script>
+
   </div>
 </body>
 </html>
