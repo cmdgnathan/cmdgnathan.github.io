@@ -68,19 +68,27 @@
             <div class="bar swri"     style="grid-column: 23 / 25;" title="Southwest Research Institute, Summer 2017"></div>
             <div class="bar rdex"     style="grid-column: 27 / 29;" title="R-Dex Systems, Summer 2018"></div>
             <div class="bar merl"     style="grid-column: 31 / 33;" title="MERL, Summer 2019"></div>
-            <div class="bar traptic"  style="grid-column: 34 / 42;" title="Traptic, Mar 2020 – Feb 2022">Traptic</div>
-            <div class="bar bowery"   style="grid-column: 42 / 50;" title="Bowery Farming, Feb 2022 – Dec 2023">Bowery</div>
-            <div class="bar zoox"     style="grid-column: 50 / 60;" title="Zoox, Jan 2024 – present">Zoox</div>
+            <div class="bar traptic"  style="grid-column: 34 / 42;" title="Traptic, Mar 2020 – Feb 2022"></div>
+            <div class="bar bowery"   style="grid-column: 42 / 50;" title="Bowery Farming, Feb 2022 – Dec 2023"></div>
+            <div class="bar zoox"     style="grid-column: 50 / 60;" title="Zoox, Jan 2024 – present"></div>
             <span class="row-counter" id="work-years" title="Internship years + full-time years = total">
               <span class="cnt-intern">&hellip;</span> + <span class="cnt-ft">&hellip;</span> = <span class="cnt-total">&hellip;</span> <span class="cnt-unit">yr</span>
             </span>
           </div>
 
           <div class="timeline-brackets">
-            <span></span>
-            <div class="bracket bracket-intern" style="grid-column: 11 / 34;"><span>Internship</span></div>
-            <div class="bracket bracket-ft"     style="grid-column: 34 / 60;"><span>Full time</span></div>
+            <span style="grid-column: 1;"></span>
+            <div class="bracket bracket-intern" style="grid-column: 11 / 34;">
+              <div class="bracket-line"></div>
+              <span class="bracket-label">Internship</span>
+            </div>
+            <div class="bracket bracket-ft" style="grid-column: 34 / 60;">
+              <div class="bracket-line"></div>
+              <span class="bracket-label">Full time</span>
+            </div>
           </div>
+
+          <div class="timeline-detail" id="timeline-detail" aria-live="polite"></div>
         </div>
       </div>
       <p class="links">
@@ -440,6 +448,27 @@
         root.querySelector('.cnt-intern').textContent = fmt(internMo);
         root.querySelector('.cnt-ft').textContent     = fmt(ftMo);
         root.querySelector('.cnt-total').textContent  = fmt(totalMo);
+      })();
+
+      // Click any timeline bar to pin its description in red below the chart.
+      // Click the same bar (or another) to switch / clear.
+      (function () {
+        var detailEl = document.getElementById('timeline-detail');
+        if (!detailEl) return;
+        document.querySelectorAll('.timeline-row .bar').forEach(function (bar) {
+          bar.addEventListener('click', function () {
+            var wasSelected = bar.classList.contains('selected');
+            document.querySelectorAll('.timeline-row .bar.selected').forEach(function (b) {
+              b.classList.remove('selected');
+            });
+            if (wasSelected) {
+              detailEl.textContent = '';
+            } else {
+              bar.classList.add('selected');
+              detailEl.textContent = bar.getAttribute('title') || '';
+            }
+          });
+        });
       })();
     </script>
 
