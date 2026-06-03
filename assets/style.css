@@ -108,6 +108,59 @@ p { margin: 0 0 1em; }
 .hero .bio h3:first-child { margin-top: 6px; }
 .hero .bio .bio-gifs { margin: 18px 0 6px; }
 
+/* ---------- career timeline (gantt) ---------- */
+.hero .timeline {
+  margin: 36px auto 4px;
+  max-width: 720px;
+}
+.hero .timeline-axis,
+.hero .timeline-row {
+  display: grid;
+  grid-template-columns: 110px repeat(15, 1fr);
+  align-items: center;
+}
+.hero .timeline-axis {
+  font-size: 10px;
+  color: #888;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 6px;
+}
+.hero .timeline-axis .axis-year { text-align: left; }
+.hero .timeline-group-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: #555;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin: 14px 0 6px;
+}
+.hero .timeline-row { margin-bottom: 4px; }
+.hero .timeline-row .row-label {
+  grid-column: 1;
+  font-size: 11px;
+  color: #555;
+  text-align: right;
+  padding-right: 10px;
+  line-height: 18px;
+}
+.hero .timeline-row .bar {
+  height: 16px;
+  border-radius: 3px;
+  cursor: default;
+  transition: filter .15s;
+}
+.hero .timeline-row .bar:hover { filter: brightness(1.1); }
+.hero .timeline-row .bar.academic { background: #2874a6; }
+.hero .timeline-row .bar.work     { background: #c0392b; }
+
+@media (max-width: 600px) {
+  .hero .timeline-axis,
+  .hero .timeline-row { grid-template-columns: 70px repeat(15, 1fr); }
+  .hero .timeline-row .row-label { font-size: 10px; padding-right: 6px; }
+  .hero .timeline-axis .axis-year { font-size: 9px; }
+}
+
 .hero .bio-gifs {
   margin: 22px auto 0;
   display: flex;
