@@ -286,6 +286,12 @@ p { margin: 0 0 1em; }
   grid-template-columns: repeat(2, 1fr);
   gap: 16px;
   text-align: left;
+  /* Break out of .bio's 720px cap so each tile is genuinely ~50% of the column */
+  width: 940px;
+  max-width: calc(100vw - 32px);
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
 }
 .hero .bio-gifs figure { margin: 0; }
 .hero .bio-gifs figcaption,
