@@ -65,8 +65,15 @@
             <div class="bar gatech" style="grid-column: 28 / 50;" title="Georgia Tech Ph.D. Robotics, Sep 2018 – Dec 2023">PhD</div>
           </div>
 
+          <div class="timeline-brackets">
+            <span></span>
+            <div class="bracket" style="grid-column: 11 / 34;"><span>Internship</span></div>
+            <div class="bracket" style="grid-column: 34 / 60;"><span>Full time</span></div>
+          </div>
+
           <div class="timeline-row">
             <span class="row-label">Work</span>
+            <div class="bar tamu"     style="grid-column: 11 / 13;" title="TAMU Cyclotron Institute / Accelerator Laboratory, Summer 2014"></div>
             <div class="bar lockheed" style="grid-column: 15 / 17;" title="Lockheed Martin Aeronautics, Summer 2015"></div>
             <div class="bar swri"     style="grid-column: 19 / 21;" title="Southwest Research Institute, Summer 2016"></div>
             <div class="bar swri"     style="grid-column: 23 / 25;" title="Southwest Research Institute, Summer 2017"></div>
@@ -428,7 +435,7 @@
       (function () {
         var el = document.getElementById('work-years');
         if (!el) return;
-        var months = 5 * 3 + 23 + 22;            // internships + Traptic + Bowery
+        var months = 6 * 3 + 23 + 22;            // 6 summer internships + Traptic + Bowery
         var now = new Date();
         months += (now.getFullYear() - 2024) * 12 + now.getMonth();
         el.textContent = (months / 12).toFixed(1) + ' yr';

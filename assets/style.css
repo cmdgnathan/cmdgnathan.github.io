@@ -161,15 +161,15 @@ p { margin: 0 0 1em; }
 .hero .timeline-row .bar:hover { filter: brightness(1.15); }
 
 /* Per-org brand colors */
-.hero .timeline-row .bar.tamu     { background: #500000; }                    /* Aggie maroon */
-.hero .timeline-row .bar.gatech   { background: #b3a369; color: #2a2a2a; }    /* Tech gold */
-.hero .timeline-row .bar.lockheed { background: #0f234d; }                    /* Lockheed navy */
-.hero .timeline-row .bar.swri     { background: #003f87; }                    /* SwRI blue */
-.hero .timeline-row .bar.rdex     { background: #4a5568; }                    /* placeholder gray */
-.hero .timeline-row .bar.merl     { background: #d2232a; }                    /* Mitsubishi red */
-.hero .timeline-row .bar.traptic  { background: #3a7d4e; }                    /* dark green */
-.hero .timeline-row .bar.bowery   { background: #79b463; color: #1a2e1a; }    /* leafy green */
-.hero .timeline-row .bar.zoox     { background: #f66e0f; }                    /* Zoox orange */
+.hero .timeline-row .bar.tamu     { background: #500000; }                    /* Aggie maroon — official */
+.hero .timeline-row .bar.gatech   { background: #b3a369; color: #2a2a2a; }    /* Tech gold — official */
+.hero .timeline-row .bar.lockheed { background: #002859; }                    /* Lockheed navy — approx */
+.hero .timeline-row .bar.swri     { background: #006bb8; }                    /* SwRI blue — approx */
+.hero .timeline-row .bar.rdex     { background: #4a5568; }                    /* gray placeholder */
+.hero .timeline-row .bar.merl     { background: #da0000; }                    /* Mitsubishi red — approx */
+.hero .timeline-row .bar.traptic  { background: #3a7d4e; }                    /* dark green — approx */
+.hero .timeline-row .bar.bowery   { background: #93af1c; color: #1f2a07; }    /* lime-olive — from rebrand */
+.hero .timeline-row .bar.zoox     { background: #33cc97; }                    /* Zoox mint — approx */
 .hero .timeline-row .row-counter {
   grid-column: -2 / -1;
   font-size: 11px;
@@ -180,12 +180,45 @@ p { margin: 0 0 1em; }
   font-variant-numeric: tabular-nums;
 }
 
+/* Bracket annotations above the Work row */
+.hero .timeline-brackets {
+  display: grid;
+  grid-template-columns: 110px repeat(60, 1fr) 56px;
+  align-items: end;
+  margin: 10px 0 14px;
+  position: relative;
+}
+.hero .timeline-brackets .bracket {
+  height: 8px;
+  border-top: 1px solid #888;
+  border-left: 1px solid #888;
+  border-right: 1px solid #888;
+  border-radius: 4px 4px 0 0;
+  position: relative;
+}
+.hero .timeline-brackets .bracket span {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 9.5px;
+  font-weight: 700;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  background: white;
+  padding: 0 6px;
+  white-space: nowrap;
+}
+
 @media (max-width: 600px) {
   .hero .timeline-axis,
-  .hero .timeline-row { grid-template-columns: 70px repeat(60, 1fr) 48px; }
+  .hero .timeline-row,
+  .hero .timeline-brackets { grid-template-columns: 70px repeat(60, 1fr) 48px; }
   .hero .timeline-row .row-label { font-size: 10px; padding-right: 6px; }
   .hero .timeline-axis .axis-year { font-size: 9px; }
   .hero .timeline-row .row-counter { font-size: 10px; padding-left: 4px; }
+  .hero .timeline-brackets .bracket span { font-size: 8.5px; padding: 0 4px; }
 }
 
 .hero .bio-gifs {
