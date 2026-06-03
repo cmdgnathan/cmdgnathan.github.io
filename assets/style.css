@@ -155,10 +155,46 @@ p { margin: 0 0 1em; }
   color: white;
   padding: 0 5px;
   white-space: nowrap;
-  overflow: hidden;
   letter-spacing: 0.02em;
+  position: relative;
 }
 .hero .timeline-row .bar:hover { filter: brightness(1.15); }
+
+/* Hover tooltip: pulls from the `title` attribute */
+.hero .timeline-row .bar:hover::after {
+  content: attr(title);
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: #2a2a2a;
+  color: #fff;
+  padding: 5px 9px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 500;
+  white-space: nowrap;
+  letter-spacing: normal;
+  text-transform: none;
+  line-height: 1.4;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+  pointer-events: none;
+  z-index: 50;
+  filter: brightness(1);
+}
+.hero .timeline-row .bar:hover::before {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 2px;
+  border: 4px solid transparent;
+  border-top-color: #2a2a2a;
+  pointer-events: none;
+  z-index: 50;
+  filter: brightness(1);
+}
 
 /* Per-org brand colors */
 .hero .timeline-row .bar.tamu     { background: #500000; }                    /* Aggie maroon — official */
@@ -180,25 +216,25 @@ p { margin: 0 0 1em; }
   font-variant-numeric: tabular-nums;
 }
 
-/* Bracket annotations above the Work row */
+/* Bracket annotations below the Industry row */
 .hero .timeline-brackets {
   display: grid;
   grid-template-columns: 110px repeat(60, 1fr) 56px;
-  align-items: end;
-  margin: 10px 0 14px;
+  align-items: start;
+  margin: 4px 0 14px;
   position: relative;
 }
 .hero .timeline-brackets .bracket {
   height: 8px;
-  border-top: 1px solid #888;
+  border-bottom: 1px solid #888;
   border-left: 1px solid #888;
   border-right: 1px solid #888;
-  border-radius: 4px 4px 0 0;
+  border-radius: 0 0 4px 4px;
   position: relative;
 }
 .hero .timeline-brackets .bracket span {
   position: absolute;
-  top: -14px;
+  top: 12px;
   left: 50%;
   transform: translateX(-50%);
   font-size: 9.5px;
