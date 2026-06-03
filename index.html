@@ -25,16 +25,12 @@
         <p>Before Zoox, I worked on Manipulation and Perception for agricultural robotics with Bowery and Traptic (acquired by Bowery). I developed end-to-end vision models and 6dof arm controllers for dexterous strawberry harvesting.</p>
         <div class="bio-gifs">
           <figure>
-            <div class="bio-gif bowery" role="img" aria-label="Automated rails of leafy greens at a Bowery Farming vertical farm (hover to play)"></div>
-            <figcaption>Bowery</figcaption>
+            <div class="bio-gif reach" role="img" aria-label="Simulated 6-DOF strawberry-harvesting arm reachability test (hover to play)"></div>
+            <figcaption>Simulated</figcaption>
           </figure>
           <figure>
             <div class="bio-gif traptic" role="img" aria-label="Traptic strawberry-harvesting robot arm reaching for a berry (hover to play)"></div>
-            <figcaption>Traptic</figcaption>
-          </figure>
-          <figure>
-            <div class="bio-gif reach" role="img" aria-label="Simulated 6-DOF strawberry-harvesting arm reachability test (hover to play)"></div>
-            <figcaption>Reachability</figcaption>
+            <figcaption>Deployed</figcaption>
           </figure>
         </div>
 
@@ -75,13 +71,15 @@
             <div class="bar traptic"  style="grid-column: 34 / 42;" title="Traptic, Mar 2020 – Feb 2022">Traptic</div>
             <div class="bar bowery"   style="grid-column: 42 / 50;" title="Bowery Farming, Feb 2022 – Dec 2023">Bowery</div>
             <div class="bar zoox"     style="grid-column: 50 / 60;" title="Zoox, Jan 2024 – present">Zoox</div>
-            <span class="row-counter" id="work-years" title="Cumulative years of internships + full-time">&hellip;</span>
+            <span class="row-counter" id="work-years" title="Internship years + full-time years = total">
+              <span class="cnt-intern">&hellip;</span> + <span class="cnt-ft">&hellip;</span> = <span class="cnt-total">&hellip;</span> <span class="cnt-unit">yr</span>
+            </span>
           </div>
 
           <div class="timeline-brackets">
             <span></span>
-            <div class="bracket" style="grid-column: 11 / 34;"><span>Internship</span></div>
-            <div class="bracket" style="grid-column: 34 / 60;"><span>Full time</span></div>
+            <div class="bracket bracket-intern" style="grid-column: 11 / 34;"><span>Internship</span></div>
+            <div class="bracket bracket-ft"     style="grid-column: 34 / 60;"><span>Full time</span></div>
           </div>
         </div>
       </div>
@@ -432,12 +430,16 @@
       // + Zoox (Jan 2024 – now). Recomputed at page load so the Zoox tail
       // grows over time.
       (function () {
-        var el = document.getElementById('work-years');
-        if (!el) return;
-        var months = 6 * 3 + 23 + 22;            // 6 summer internships + Traptic + Bowery
+        var root = document.getElementById('work-years');
+        if (!root) return;
+        var internMo = 6 * 3;                                 // 6 summer internships
         var now = new Date();
-        months += (now.getFullYear() - 2024) * 12 + now.getMonth();
-        el.textContent = (months / 12).toFixed(1) + ' yr';
+        var ftMo = 23 + 22 + (now.getFullYear() - 2024) * 12 + now.getMonth();
+        var totalMo = internMo + ftMo;
+        var fmt = function (m) { return (m / 12).toFixed(1); };
+        root.querySelector('.cnt-intern').textContent = fmt(internMo);
+        root.querySelector('.cnt-ft').textContent     = fmt(ftMo);
+        root.querySelector('.cnt-total').textContent  = fmt(totalMo);
       })();
     </script>
 

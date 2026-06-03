@@ -116,7 +116,7 @@ p { margin: 0 0 1em; }
 .hero .timeline-axis,
 .hero .timeline-row {
   display: grid;
-  grid-template-columns: 110px repeat(60, 1fr) 56px;
+  grid-template-columns: 110px repeat(60, 1fr) 124px;
   align-items: center;
 }
 .hero .timeline-axis {
@@ -214,12 +214,17 @@ p { margin: 0 0 1em; }
   text-align: right;
   padding-left: 8px;
   font-variant-numeric: tabular-nums;
+  white-space: nowrap;
 }
+.hero .timeline-row .row-counter .cnt-intern { color: #2874a6; }
+.hero .timeline-row .row-counter .cnt-ft     { color: #c0392b; }
+.hero .timeline-row .row-counter .cnt-total  { color: #2a2a2a; }
+.hero .timeline-row .row-counter .cnt-unit   { color: #888; font-weight: 500; }
 
 /* Bracket annotations below the Industry row */
 .hero .timeline-brackets {
   display: grid;
-  grid-template-columns: 110px repeat(60, 1fr) 56px;
+  grid-template-columns: 110px repeat(60, 1fr) 124px;
   align-items: start;
   margin: 4px 0 14px;
   position: relative;
@@ -246,11 +251,15 @@ p { margin: 0 0 1em; }
   padding: 0 6px;
   white-space: nowrap;
 }
+.hero .timeline-brackets .bracket-intern         { border-color: #2874a6; }
+.hero .timeline-brackets .bracket-intern span    { color: #2874a6; }
+.hero .timeline-brackets .bracket-ft             { border-color: #c0392b; }
+.hero .timeline-brackets .bracket-ft span        { color: #c0392b; }
 
 @media (max-width: 600px) {
   .hero .timeline-axis,
   .hero .timeline-row,
-  .hero .timeline-brackets { grid-template-columns: 70px repeat(60, 1fr) 48px; }
+  .hero .timeline-brackets { grid-template-columns: 70px repeat(60, 1fr) 108px; }
   .hero .timeline-row .row-label { font-size: 10px; padding-right: 6px; }
   .hero .timeline-axis .axis-year { font-size: 9px; }
   .hero .timeline-row .row-counter { font-size: 10px; padding-left: 4px; }
@@ -260,7 +269,7 @@ p { margin: 0 0 1em; }
 .hero .bio-gifs {
   margin: 22px auto 0;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 16px;
   text-align: left;
 }
