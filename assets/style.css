@@ -116,7 +116,7 @@ p { margin: 0 0 1em; }
 .hero .timeline-axis,
 .hero .timeline-row {
   display: grid;
-  grid-template-columns: 110px repeat(60, 1fr);
+  grid-template-columns: 110px repeat(60, 1fr) 56px;
   align-items: center;
 }
 .hero .timeline-axis {
@@ -153,12 +153,22 @@ p { margin: 0 0 1em; }
 .hero .timeline-row .bar:hover { filter: brightness(1.1); }
 .hero .timeline-row .bar.academic { background: #2874a6; }
 .hero .timeline-row .bar.work     { background: #c0392b; }
+.hero .timeline-row .row-counter {
+  grid-column: -2 / -1;
+  font-size: 11px;
+  font-weight: 700;
+  color: #c0392b;
+  text-align: right;
+  padding-left: 8px;
+  font-variant-numeric: tabular-nums;
+}
 
 @media (max-width: 600px) {
   .hero .timeline-axis,
-  .hero .timeline-row { grid-template-columns: 70px repeat(60, 1fr); }
+  .hero .timeline-row { grid-template-columns: 70px repeat(60, 1fr) 48px; }
   .hero .timeline-row .row-label { font-size: 10px; padding-right: 6px; }
   .hero .timeline-axis .axis-year { font-size: 9px; }
+  .hero .timeline-row .row-counter { font-size: 10px; padding-left: 4px; }
 }
 
 .hero .bio-gifs {

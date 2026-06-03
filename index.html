@@ -71,6 +71,7 @@
             <div class="bar work" style="grid-column: 27 / 29;" title="R-Dex Systems, Summer 2018"></div>
             <div class="bar work" style="grid-column: 31 / 33;" title="MERL, Summer 2019"></div>
             <div class="bar work" style="grid-column: 34 / 60;" title="Traptic → Bowery → Zoox, Mar 2020 – present"></div>
+            <span class="row-counter" id="work-years" title="Cumulative years of internships + full-time">&hellip;</span>
           </div>
         </div>
       </div>
@@ -415,6 +416,19 @@
           }
         });
       });
+
+      // Cumulative work-experience counter: 5 summer internships (3 mo each)
+      // + Traptic (Mar 2020 – Feb 2022) + Bowery (Feb 2022 – Dec 2023)
+      // + Zoox (Jan 2024 – now). Recomputed at page load so the Zoox tail
+      // grows over time.
+      (function () {
+        var el = document.getElementById('work-years');
+        if (!el) return;
+        var months = 5 * 3 + 23 + 22;            // internships + Traptic + Bowery
+        var now = new Date();
+        months += (now.getFullYear() - 2024) * 12 + now.getMonth();
+        el.textContent = (months / 12).toFixed(1) + ' yr';
+      })();
     </script>
 
   </div>
