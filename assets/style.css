@@ -273,6 +273,10 @@ p { margin: 0 0 1em; }
   font-size: 14px;
   line-height: 1.6;
 }
+.entry .pitch .q {
+  color: #c0392b;
+  font-weight: 700;
+}
 
 .entry .links { font-size: 13px; color: #888; }
 .entry .links a {
