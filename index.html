@@ -292,7 +292,7 @@
         <h4>Enhancing Multi-Robot Perception via Learned Data Association</h4>
         <p class="meta"><span class="venue">ICRA Workshops, 2020</span></p>
         <p class="authors"><b>N. Glaser</b>, Y.-C. Liu, J. Tian, Z. Kira</p>
-        <p class="pitch"><strong class="q">Can robots agree on which detections are the same object?</strong> An early prototype for collaborative perception: learning which detections from different robots refer to the same real-world thing &mdash; a precursor to the Who2com / When2com line.</p>
+        <p class="pitch"><strong class="q">Can robots help each other in fine-grained perception tasks?</strong> An early prototype for collaborative perception: learning which detections from different robots refer to the same real-world thing &mdash; a precursor to the Who2com / When2com line.</p>
         <p class="links"><a href="https://arxiv.org/abs/2107.00769">arXiv</a></p>
       </div>
     </div>
@@ -421,6 +421,11 @@
       <a href="https://github.com/cmdgnathan/cmdgnathan.github.io">source</a>
     </footer>
 
+    <!-- Lightbox overlay for enlarging paper figures (click to open, click/Esc to close) -->
+    <div id="lightbox" class="lightbox" hidden aria-hidden="true">
+      <img id="lightbox-img" src="" alt="">
+    </div>
+
     <script>
       // Click any hero gif to toggle pinned play/pause (overrides hover)
       document.querySelectorAll('.bio-gif').forEach(function (el) {
@@ -449,6 +454,29 @@
         root.querySelector('.cnt-intern').textContent = fmt(internMo);
         root.querySelector('.cnt-ft').textContent     = fmt(ftMo);
         root.querySelector('.cnt-total').textContent  = fmt(totalMo);
+      })();
+
+      // Click any paper thumbnail to open the figure full-size in a lightbox.
+      // Click anywhere on the overlay (or press Escape) to close.
+      (function () {
+        var lb = document.getElementById('lightbox');
+        var lbImg = document.getElementById('lightbox-img');
+        if (!lb || !lbImg) return;
+        document.querySelectorAll('#papers .entry .thumb').forEach(function (thumb) {
+          var img = thumb.querySelector('img');
+          if (!img) return;
+          thumb.addEventListener('click', function (e) {
+            if (img.style.display === 'none' || !img.getAttribute('src')) return;
+            e.preventDefault();
+            lbImg.src = img.src;
+            lbImg.alt = img.alt || '';
+            lb.hidden = false;
+          });
+        });
+        lb.addEventListener('click', function () { lb.hidden = true; });
+        document.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape' && !lb.hidden) lb.hidden = true;
+        });
       })();
 
       // Click any timeline bar to pin its description in red below the chart.
