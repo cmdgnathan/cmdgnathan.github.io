@@ -2454,11 +2454,6 @@
           </div>
           <p class="equation-gloss" style="margin-top:0.6rem;">10 reasoning symbols total, added as new embedding rows alongside the base 4,000-token vocabulary.</p>
         </div>
-        <button type="button" class="finding-tile" aria-controls="detail-f5-3">Reasoning tokens can shift output, and the model sometimes reaches for them unprompted</button>
-        <div class="tile-detail" id="detail-f5-3" hidden>
-          <p class="equation-gloss" style="margin-bottom:0.6rem;">Reasoning tokens &mdash; MOTIF_REPEAT, CADENCE_PAC, SEQUENCE_RISING, and others &mdash; are symbols injected into the token stream that don&rsquo;t correspond to any note, meant to give the model something like an explicit plan before it commits to notes. Forcing one can genuinely shift output, though it isn&rsquo;t yet established as a reliable lever across every composer.</p>
-          <p class="equation-gloss">More strikingly, the model sometimes reaches for these symbols on its own during ordinary generation, without ever being asked to &mdash; real evidence that reasoning tokens aren&rsquo;t just something imposed from outside, but something the model can learn to use as part of its own generation process.</p>
-        </div>
         <button type="button" class="finding-tile" aria-controls="detail-f5-6">We can inject a high level plan into the melody via reasoning tokens</button>
         <div class="tile-detail" id="detail-f5-6" hidden>
           <p class="equation-gloss">MOTIF_NEW is a reasoning token, not a note &mdash; injected into the stream before a phrase to force the model to introduce new material at that point, rather than let it choose on its own. Tested here on Mozart-conditioned generation: the same composer setup, with and without MOTIF_NEW forced before every phrase.</p>
