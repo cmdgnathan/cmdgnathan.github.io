@@ -230,6 +230,30 @@
   .key-black-f2 { fill: var(--key-black); stroke: var(--key-line); stroke-width: 1; filter: drop-shadow(1.5px 0.5px 1.5px rgba(0,0,0,0.5)); }
   .staff-line-f2 { stroke: var(--ink-soft); stroke-width: 1.8; fill: none; opacity: 0.75; }
   body.evidence-open { overflow: hidden; }
+
+  /* LLM Playbook tab: the diagram is a separate document in an iframe. It
+     defines its own :root custom properties using the same names as this page
+     (--bg, --accent, --hue0..12), so inlining it would clobber this page's
+     palette on every tab. The iframe isolates it, and deferring the src until
+     the tab is opened keeps its weight off first load. */
+  .playbook-frame-wrap {
+    position: relative;
+    width: 100%;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--surface);
+  }
+  .playbook-frame-wrap iframe {
+    display: block;
+    width: 100%;
+    height: min(150vh, 1600px);
+    border: 0;
+  }
+  .playbook-open { margin-top: 0.6rem; font-size: 0.9rem; }
+  @media (max-width: 720px) {
+    .playbook-frame-wrap iframe { height: min(170vh, 1400px); }
+  }
 </style>
 
 <div class="wrap">
@@ -241,6 +265,7 @@
     <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-motivation" id="tab-motivation" data-tab="motivation">Teaser</button>
     <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-results" id="tab-results" data-tab="results">Outline</button>
     <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-findings" id="tab-findings" data-tab="findings">Key Findings</button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-playbook" id="tab-playbook" data-tab="playbook">LLM Playbook</button>
     <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-nextsteps" id="tab-nextsteps" data-tab="nextsteps">Next Steps</button>
   </div>
 
@@ -2608,10 +2633,20 @@
   </details>
 
   </div>
+  <button class="tab-next" type="button" data-tab="playbook">Next: LLM Playbook &rarr;</button>
+  </div>
+
+    <div class="tab-panel" id="panel-playbook" role="tabpanel" aria-labelledby="tab-playbook" hidden>
+  <p class="topic-intro">The standard LLM training playbook &mdash; pretraining, mid&#8209;training, post&#8209;training, reasoning &mdash; mapped onto this project&rsquo;s actual music experiments. Click any stage to read its writeup, hear the audio, or drill into the figures behind it.</p>
+  <div class="playbook-frame-wrap">
+    <iframe id="playbook-frame" data-src="llm-playbook.html" loading="lazy"
+            title="From Beethoven to the Blues: the LLM training playbook mapped onto this project's music experiments"></iframe>
+  </div>
+  <p class="playbook-open"><a href="llm-playbook.html" target="_blank" rel="noopener">Open the diagram in its own tab &rarr;</a></p>
   <button class="tab-next" type="button" data-tab="nextsteps">Next: Next Steps &rarr;</button>
   </div>
 
-  <div class="tab-panel" id="panel-nextsteps" role="tabpanel" aria-labelledby="tab-nextsteps" hidden>
+<div class="tab-panel" id="panel-nextsteps" role="tabpanel" aria-labelledby="tab-nextsteps" hidden>
   <p class="topic-intro">We have shown that the LLM playbook for text generation maps nicely to music generation. One might argue: music is a computational reduction of text.</p>
   <div class="equation-row">
     <div class="equation-block equation-block--hypothesis">
@@ -2751,6 +2786,19 @@
     });
     closeBtn.addEventListener('click', closePanel);
     backdrop.addEventListener('click', closePanel);
+  })();
+
+  (function () {
+    var fr = document.getElementById('playbook-frame');
+    if (!fr) return;
+    function load() {
+      if (!fr.getAttribute('src')) fr.setAttribute('src', fr.dataset.src);
+    }
+    document.querySelectorAll('[data-tab="playbook"]').forEach(function (el) {
+      el.addEventListener('click', load);
+    });
+    // also cover a direct #playbook deep link
+    if (location.hash === '#playbook') load();
   })();
 </script>
 
