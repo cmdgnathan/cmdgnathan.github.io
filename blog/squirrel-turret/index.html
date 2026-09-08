@@ -26,14 +26,60 @@
     .post .wip strong { color: #c0392b; }
 
     figure.shot { margin: 0 0 26px; }
-    figure.shot img {
+
+    /* Poster-first GIF, same trick as the homepage bio-gifs: the browser only
+       fetches the GIF once a rule referencing it applies, i.e. on hover/click. */
+    .shot-gif {
       width: 100%;
-      height: auto;
-      display: block;
+      aspect-ratio: 4 / 3;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
       border: 1px solid #e4e4e4;
       border-radius: 3px;
-      background: #0e0e0e;
+      cursor: pointer;
+      position: relative;
     }
+    .shot-gif.hit { background-image: url('_assets/squirrel-hit-poster.jpg'); }
+    @media (hover: hover) {
+      .shot-gif.hit:hover { background-image: url('_assets/squirrel-hit.gif'); }
+    }
+    /* Click-to-toggle beats hover */
+    .shot-gif.hit.pinned-play  { background-image: url('_assets/squirrel-hit.gif'); }
+    .shot-gif.hit.pinned-pause { background-image: url('_assets/squirrel-hit-poster.jpg'); }
+
+    /* Play affordance, hidden while the gif is running */
+    .shot-gif::after {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 62px; height: 62px;
+      transform: translate(-50%, -50%);
+      background: rgba(0, 0, 0, 0.55);
+      border-radius: 50%;
+      pointer-events: none;
+      transition: opacity .15s;
+    }
+    .shot-gif::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      z-index: 1;
+      width: 0; height: 0;
+      margin-left: 4px;
+      transform: translate(-50%, -50%);
+      border: 11px solid transparent;
+      border-left: 18px solid #fff;
+      pointer-events: none;
+      transition: opacity .15s;
+    }
+    .shot-gif.pinned-play::before,
+    .shot-gif.pinned-play::after { opacity: 0; }
+    @media (hover: hover) {
+      .shot-gif:hover::before,
+      .shot-gif:hover::after { opacity: 0; }
+    }
+    .post .hint { color: #aaa; }
     figure.shot figcaption,
     figure.clip figcaption {
       font-size: 13px;
@@ -65,10 +111,10 @@
       there is a squirrel, and points a hose at it.</p>
 
       <figure class="shot">
-        <img src="_assets/squirrel-hit.gif" loading="lazy"
-             alt="Overhead view: a squirrel sitting in the mulch bed is hit by a water stream and bolts">
+        <div class="shot-gif hit" role="img"
+             aria-label="Overhead view: a squirrel sitting in the mulch bed is hit by a water stream and bolts (hover or click to play)"></div>
         <figcaption><b>The whole idea, in two seconds.</b> Squirrel in the mulch bed, stream arrives,
-        squirrel leaves.</figcaption>
+        squirrel leaves. <span class="hint">Hover to play, click to pin.</span></figcaption>
       </figure>
 
       <p>It splits into two halves that turned out to be almost independent problems:
@@ -108,6 +154,20 @@
   </footer>
 
   <script src="../../assets/media.js"></script>
+  <script>
+    // Click to pin the gif playing / paused, overriding hover. Same toggle as
+    // the hero gifs on the homepage.
+    document.querySelectorAll('.shot-gif').forEach(function (el) {
+      el.addEventListener('click', function () {
+        if (el.classList.contains('pinned-play')) {
+          el.classList.replace('pinned-play', 'pinned-pause');
+        } else {
+          el.classList.remove('pinned-pause');
+          el.classList.add('pinned-play');
+        }
+      });
+    });
+  </script>
 
 </body>
 </html>
