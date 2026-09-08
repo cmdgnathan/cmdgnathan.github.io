@@ -211,6 +211,7 @@ p { margin: 0 0 1em; }
 .hero .timeline-row .bar.traptic  { background: #3a7d4e; }                    /* dark green — approx */
 .hero .timeline-row .bar.bowery   { background: #93af1c; color: #1f2a07; }    /* lime-olive — from rebrand */
 .hero .timeline-row .bar.zoox     { background: #33cc97; }                    /* Zoox mint — approx */
+.hero .timeline-row .bar.figure   { background: #1a1a1a; }                    /* Figure black — approx */
 /* Work-experience tally — sits below the chart so the bars get full width */
 .hero .timeline-counter {
   margin: 10px 0 0;

@@ -73,7 +73,8 @@
             <div class="bar merl"     style="grid-column: 31 / 33;" title="MERL, Summer 2019"></div>
             <div class="bar traptic"  style="grid-column: 34 / 42;" title="Traptic, Mar 2020 – Feb 2022"></div>
             <div class="bar bowery"   style="grid-column: 42 / 50;" title="Bowery Farming, Feb 2022 – Dec 2023"></div>
-            <div class="bar zoox"     style="grid-column: 50 / 60;" title="Zoox, Jan 2024 – present"></div>
+            <div class="bar zoox"     style="grid-column: 50 / 61;" title="Zoox, Jan 2024 – Aug 2026"></div>
+            <div class="bar figure"   style="grid-column: 61 / 62;" title="Figure AI, Sep 2026 – present"></div>
           </div>
 
           <div class="timeline-brackets">
@@ -82,7 +83,7 @@
               <div class="bracket-line"></div>
               <span class="bracket-label">Internship</span>
             </div>
-            <div class="bracket bracket-ft" style="grid-column: 36 / 60;">
+            <div class="bracket bracket-ft" style="grid-column: 36 / 62;">
               <div class="bracket-line"></div>
               <span class="bracket-label">Full time</span>
             </div>
@@ -139,12 +140,18 @@
 
     <!-- ============= EMPLOYMENT ============= -->
     <details class="section" id="employment">
-      <summary>Employment <span class="count">(5)</span></summary>
+      <summary>Employment <span class="count">(6)</span></summary>
       <hr class="section-rule">
 
     <div class="job">
+      <h4><a href="https://www.figure.ai/">Figure AI</a> <span class="role">&middot; Senior AI Engineer</span></h4>
+      <span class="when">Sep 2026 &ndash; Present</span>
+      <p>AI engineering on the Helix team.</p>
+    </div>
+
+    <div class="job">
       <h4><a href="https://zoox.com/">Zoox</a> <span class="role">&middot; Software Engineer</span></h4>
-      <span class="when">Foster City, CA &middot; Jan 2024 &ndash; Present</span>
+      <span class="when">Foster City, CA &middot; Jan 2024 &ndash; Aug 2026</span>
       <p>Co-developed a foundation-model-based scene embedding and retrieval stack for long-tail scenario mining. Tech lead for True-Positive collision-avoidance evaluation. Built scalable simulation/evaluation pipelines (~20 developers); post-trained autoregressive &amp; MAE foundation models on autonomy logs; built agentic scenario-triage with text-to-SQL over heterogeneous data. Reduced simulation cost from $100k/mo to $10k/mo while preserving metric sensitivity.</p>
     </div>
 
@@ -457,8 +464,9 @@
 
       // Cumulative work-experience counter: 5 summer internships (3 mo each)
       // + Traptic (Mar 2020 – Feb 2022) + Bowery (Feb 2022 – Dec 2023)
-      // + Zoox (Jan 2024 – now). Recomputed at page load so the Zoox tail
-      // grows over time.
+      // + Zoox (Jan 2024 – Aug 2026) + Figure AI (Sep 2026 – now). Full-time
+      // has been continuous since Jan 2024, so the tail is still measured from
+      // there; recomputed at page load so it grows over time.
       (function () {
         var root = document.getElementById('work-years');
         if (!root) return;
