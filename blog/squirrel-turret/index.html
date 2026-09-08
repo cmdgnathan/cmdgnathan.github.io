@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Squirrel Turret &mdash; Nathaniel Moore Glaser</title>
+  <meta name="description" content="A camera-guided pan/tilt water turret that detects squirrels in the backyard and sprays them. Clips, with a write-up to follow.">
+  <link rel="stylesheet" href="../../assets/style.css">
+  <style>
+    .post { max-width: 760px; margin: 0 auto; }
+    .post .back { font-size: 13px; color: #2874a6; display: inline-block; margin-bottom: 18px; }
+    .post .post-meta { font-size: 13px; color: #888; margin: 0 0 4px; }
+    .post .post-meta .venue { color: #2874a6; font-weight: 700; }
+    .post h1 { margin: 6px 0 18px; }
+    .post h2 { font-size: 19px; margin: 44px 0 10px; }
+    .post p { font-size: 15px; line-height: 1.7; color: #444; }
+    .post .wip {
+      border-left: 3px solid #c0392b;
+      background: #fbf4f3;
+      padding: 10px 14px;
+      margin: 0 0 26px;
+      font-size: 14px;
+      line-height: 1.6;
+      color: #555;
+    }
+    .post .wip strong { color: #c0392b; }
+
+    figure.shot { margin: 0 0 26px; }
+    figure.shot img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border: 1px solid #e4e4e4;
+      border-radius: 3px;
+      background: #0e0e0e;
+    }
+    figure.shot figcaption,
+    figure.clip figcaption {
+      font-size: 13px;
+      color: #888;
+      line-height: 1.6;
+      margin-top: 7px;
+    }
+    figure.shot figcaption b,
+    figure.clip figcaption b { color: #555; font-weight: 600; }
+    figure.clip { margin: 0 0 26px; }
+  </style>
+</head>
+<body>
+
+  <div class="navbar">Nathaniel Moore Glaser</div>
+
+  <div class="wrap">
+    <div class="post">
+
+      <a class="back" href="../../">&larr; Back</a>
+
+      <p class="post-meta"><span class="venue">Blog</span> &middot; September 2026</p>
+      <h1>Squirrel turret</h1>
+
+      <p class="wip"><strong>Placeholder.</strong> Posting the clips first. The calibration procedure,
+      the detector training, the safety interlocks, and the open problems all still to come.</p>
+
+      <p>A pan/tilt water turret that watches the backyard, decides whether the thing moving out
+      there is a squirrel, and points a hose at it.</p>
+
+      <figure class="shot">
+        <img src="_assets/squirrel-hit.gif" loading="lazy"
+             alt="Overhead view: a squirrel sitting in the mulch bed is hit by a water stream and bolts">
+        <figcaption><b>The whole idea, in two seconds.</b> Squirrel in the mulch bed, stream arrives,
+        squirrel leaves.</figcaption>
+      </figure>
+
+      <p>It splits into two halves that turned out to be almost independent problems:
+      <b>detection</b> (given a camera frame, is there a squirrel in it, and where?) and <b>aiming</b>
+      (given a target location in the image, where do the servos need to point?).</p>
+
+      <p>Aiming had a shortcut worth mentioning. The obvious approach is to recover depth from the
+      camera, solve the camera-to-turret transform, then model the water's trajectory &mdash; three hard
+      calibrations multiplied together. But the camera never moves, which means a pixel <em>already</em>
+      encodes a ground location, and the whole chain collapses into one empirical lookup table:
+      <code>pixel &rarr; pan/tilt servo command</code>. You walk a grid of image cells, jog the turret
+      until the water lands in each one, and record the command. The table <em>is</em> the calibration &mdash;
+      pressure sag and droplet drag are just baked into the numbers.</p>
+
+      <h2>Full footage</h2>
+
+      <p>More of it running &mdash; the overhead camera, the infrared stream the detector works from,
+      and the turret firing from ground level.</p>
+
+      <!-- To swap in the composite cut (overhead -> infrared -> 2x3 grid of the six clips):
+           upload it, then replace eLvKv0eDaq0 with the new video ID in both places below. -->
+      <figure class="clip">
+        <div class="lite-yt" data-id="eLvKv0eDaq0"
+             aria-label="Backyard Squirrel Defense System video">
+          <img src="https://i.ytimg.com/vi/eLvKv0eDaq0/hqdefault.jpg" loading="lazy"
+               alt="Backyard Squirrel Defense System">
+        </div>
+        <figcaption>Backyard Squirrel Defense System &mdash;
+        <a href="https://www.youtube.com/watch?v=eLvKv0eDaq0">watch on YouTube</a>.</figcaption>
+      </figure>
+
+    </div>
+  </div>
+
+  <footer>
+    <a href="../../">Nathaniel Moore Glaser</a>
+  </footer>
+
+  <script src="../../assets/media.js"></script>
+
+</body>
+</html>
