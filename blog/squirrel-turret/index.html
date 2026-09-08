@@ -25,33 +25,25 @@
     }
     .post .wip strong { color: #c0392b; }
 
-    figure.clip { margin: 0 0 26px; }
-    figure.clip video {
+    figure.shot { margin: 0 0 26px; }
+    figure.shot img {
       width: 100%;
       height: auto;
       display: block;
-      background: #0e0e0e;
       border: 1px solid #e4e4e4;
       border-radius: 3px;
+      background: #0e0e0e;
     }
+    figure.shot figcaption,
     figure.clip figcaption {
       font-size: 13px;
       color: #888;
       line-height: 1.6;
       margin-top: 7px;
     }
+    figure.shot figcaption b,
     figure.clip figcaption b { color: #555; font-weight: 600; }
-
-    .clip-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 22px;
-      margin-bottom: 26px;
-    }
-    .clip-grid figure.clip { margin: 0; }
-    @media (max-width: 640px) {
-      .clip-grid { grid-template-columns: 1fr; }
-    }
+    figure.clip { margin: 0 0 26px; }
   </style>
 </head>
 <body>
@@ -70,10 +62,18 @@
       the detector training, the safety interlocks, and the open problems all still to come.</p>
 
       <p>A pan/tilt water turret that watches the backyard, decides whether the thing moving out
-      there is a squirrel, and points a hose at it. It splits into two halves that turned out to be
-      almost independent problems: <b>detection</b> (given a camera frame, is there a squirrel in it,
-      and where?) and <b>aiming</b> (given a target location in the image, where do the servos need
-      to point?).</p>
+      there is a squirrel, and points a hose at it.</p>
+
+      <figure class="shot">
+        <img src="_assets/squirrel-hit.gif" loading="lazy"
+             alt="Overhead view: a squirrel sitting in the mulch bed is hit by a water stream and bolts">
+        <figcaption><b>The whole idea, in four seconds.</b> Squirrel in the mulch bed, stream arrives,
+        squirrel leaves.</figcaption>
+      </figure>
+
+      <p>It splits into two halves that turned out to be almost independent problems:
+      <b>detection</b> (given a camera frame, is there a squirrel in it, and where?) and <b>aiming</b>
+      (given a target location in the image, where do the servos need to point?).</p>
 
       <p>Aiming had a shortcut worth mentioning. The obvious approach is to recover depth from the
       camera, solve the camera-to-turret transform, then model the water's trajectory &mdash; three hard
@@ -83,60 +83,21 @@
       until the water lands in each one, and record the command. The table <em>is</em> the calibration &mdash;
       pressure sag and droplet drag are just baked into the numbers.</p>
 
-      <h2>It works</h2>
+      <h2>Full footage</h2>
 
+      <p>More of it running &mdash; the overhead camera, the infrared stream the detector works from,
+      and the turret firing from ground level.</p>
+
+      <!-- To swap in the composite cut (overhead -> infrared -> 2x3 grid of the six clips):
+           upload it, then replace eLvKv0eDaq0 with the new video ID in both places below. -->
       <figure class="clip">
-        <video controls playsinline preload="metadata" muted
-               poster="_assets/hit-overhead.jpg"
-               aria-label="Overhead security camera: a squirrel in the mulch bed is hit by a water stream and leaves">
-          <source src="_assets/hit-overhead.mp4" type="video/mp4">
-        </video>
-        <figcaption><b>Overhead view, from the yard security camera.</b> A squirrel is sitting in the
-        mulch bed at left. The stream sweeps onto it, and it leaves.</figcaption>
-      </figure>
-
-      <h2>Firing, from ground level</h2>
-
-      <div class="clip-grid">
-        <figure class="clip">
-          <video controls playsinline preload="metadata" muted poster="_assets/fire-1.jpg">
-            <source src="_assets/fire-1.mp4" type="video/mp4">
-          </video>
-          <figcaption>Turret firing across the gravel toward the mulch bed.</figcaption>
-        </figure>
-
-        <figure class="clip">
-          <video controls playsinline preload="metadata" muted poster="_assets/fire-2.jpg">
-            <source src="_assets/fire-2.mp4" type="video/mp4">
-          </video>
-          <figcaption>A flatter shot &mdash; note how far the stream carries.</figcaption>
-        </figure>
-
-        <figure class="clip">
-          <video controls playsinline preload="metadata" muted poster="_assets/fire-3.jpg">
-            <source src="_assets/fire-3.mp4" type="video/mp4">
-          </video>
-          <figcaption>Another pass across the same bed.</figcaption>
-        </figure>
-
-        <figure class="clip">
-          <video controls playsinline preload="metadata" muted poster="_assets/fire-4.jpg">
-            <source src="_assets/fire-4.mp4" type="video/mp4">
-          </video>
-          <figcaption>Evening light, longer arc.</figcaption>
-        </figure>
-      </div>
-
-      <h2>What the detector sees</h2>
-
-      <figure class="clip">
-        <video controls playsinline preload="metadata" muted
-               poster="_assets/detect-ir.jpg"
-               aria-label="Infrared camera view of the yard, the stream the squirrel detector runs on">
-          <source src="_assets/detect-ir.mp4" type="video/mp4">
-        </video>
-        <figcaption><b>The infrared stream the detector runs on.</b> No color, which rules out any
-        detection trick that leans on it.</figcaption>
+        <div class="lite-yt" data-id="eLvKv0eDaq0"
+             aria-label="Backyard Squirrel Defense System video">
+          <img src="https://i.ytimg.com/vi/eLvKv0eDaq0/hqdefault.jpg" loading="lazy"
+               alt="Backyard Squirrel Defense System">
+        </div>
+        <figcaption>Backyard Squirrel Defense System &mdash;
+        <a href="https://www.youtube.com/watch?v=eLvKv0eDaq0">watch on YouTube</a>.</figcaption>
       </figure>
 
     </div>
@@ -145,6 +106,8 @@
   <footer>
     <a href="../../">Nathaniel Moore Glaser</a>
   </footer>
+
+  <script src="../../assets/media.js"></script>
 
 </body>
 </html>

@@ -541,3 +541,56 @@ footer a { color: #888; }
 }
 #papers .entry .thumb { cursor: zoom-in; transition: transform .15s; }
 #papers .entry .thumb:hover { transform: scale(1.02); }
+
+/* ---------- lite YouTube embed (click the poster to load the iframe; see media.js) ---------- */
+.lite-yt {
+  position: relative;
+  display: block;
+  aspect-ratio: 16 / 9;
+  background: #0e0e0e;
+  border: 1px solid #e4e4e4;
+  border-radius: 3px;
+  overflow: hidden;
+  cursor: pointer;
+}
+.lite-yt img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.lite-yt::after {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  z-index: 2;
+  width: 68px; height: 68px;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.72);
+  border-radius: 50%;
+  transition: background .15s;
+  pointer-events: none;
+}
+.lite-yt::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  z-index: 3;
+  width: 0; height: 0;
+  margin-left: 5px;
+  transform: translate(-50%, -50%);
+  border: 12px solid transparent;
+  border-left: 20px solid #fff;
+  pointer-events: none;
+}
+.lite-yt:hover::after { background: #c0392b; }
+.lite-yt.playing::before,
+.lite-yt.playing::after { display: none; }
+.lite-yt iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  z-index: 4;
+}
