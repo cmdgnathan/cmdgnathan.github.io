@@ -310,17 +310,59 @@ p { margin: 0 0 1em; }
   line-height: 1.4;
 }
 
-/* Third-party clip in the bio (preload=metadata, so it costs ~nothing until played) */
+/* Third-party clip in the bio. Sized to match .bio-gif-wide exactly, and shown
+   poster-first like the bio gifs: no player chrome until it's clicked.
+   preload="none" means zero video bytes until then. */
 .hero .bio-video {
   margin: 22px auto 6px;
+  width: calc((100% - 16px) * 2 / 3 + 16px);
   max-width: 480px;
+}
+.hero .bio-video .bio-video-box {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #0e0e0e;
+  cursor: pointer;
 }
 .hero .bio-video video {
   width: 100%;
-  height: auto;
+  height: 100%;
   display: block;
-  border-radius: 8px;
-  background: #0e0e0e;
+  object-fit: cover;
+}
+.hero .bio-video .bio-video-box::after {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 54px; height: 54px;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.55);
+  border-radius: 50%;
+  pointer-events: none;
+  transition: background .15s;
+}
+.hero .bio-video .bio-video-box::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  z-index: 1;
+  width: 0; height: 0;
+  margin-left: 4px;
+  transform: translate(-50%, -50%);
+  border: 10px solid transparent;
+  border-left: 16px solid #fff;
+  pointer-events: none;
+}
+.hero .bio-video .bio-video-box:hover::after { background: rgba(0, 0, 0, 0.75); }
+.hero .bio-video .bio-video-box.playing::before,
+.hero .bio-video .bio-video-box.playing::after { display: none; }
+.hero .bio-video .bio-video-box.playing { cursor: default; }
+
+@media (max-width: 720px) {
+  .hero .bio-video { width: 100%; max-width: 320px; }
 }
 
 .hero .bio-gif-wide {

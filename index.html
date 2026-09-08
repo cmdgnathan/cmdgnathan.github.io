@@ -24,11 +24,13 @@
         <h3>Background: Large-Scale Robotics</h3>
         <p>Previously, I worked at <a href="https://zoox.com/">Zoox</a>, where I led efforts in collision avoidance, especially around evaluating and improving our low-latency, high-recall driving policy around critical and rare events. My background spans foundation model training, ML, computer vision, large-scale data, and agentic workflows.</p>
         <figure class="bio-video">
-          <video controls playsinline preload="metadata"
-                 poster="assets/video/zoox-sensor-height.jpg"
-                 aria-label="Zoox robotaxi perception: camera views with 3D detections above, and the corresponding tracked scene below">
-            <source src="assets/video/zoox-sensor-height.mp4" type="video/mp4">
-          </video>
+          <div class="bio-video-box">
+            <video playsinline preload="none"
+                   poster="assets/video/zoox-sensor-height.jpg"
+                   aria-label="Zoox robotaxi perception: camera views with 3D detections above, and the corresponding tracked scene below (click to play)">
+              <source src="assets/video/zoox-sensor-height.mp4" type="video/mp4">
+            </video>
+          </div>
           <figcaption>Perception on the Zoox robotaxi &mdash; camera views with 3D detections, and the tracked scene they feed. Video: <a href="https://x.com/zoox/status/2094480577756041258">Zoox</a>.</figcaption>
         </figure>
 
@@ -471,6 +473,20 @@
     </div>
 
     <script>
+      // Bio clip: poster-only at rest (matching the hero gifs), then click to
+      // reveal native controls and play. preload="none" keeps it at zero bytes
+      // until someone actually asks for it.
+      document.querySelectorAll('.bio-video-box').forEach(function (box) {
+        var vid = box.querySelector('video');
+        if (!vid) return;
+        box.addEventListener('click', function () {
+          if (box.classList.contains('playing')) return;
+          box.classList.add('playing');
+          vid.controls = true;
+          vid.play();
+        });
+      });
+
       // Click any hero gif to toggle pinned play/pause (overrides hover)
       document.querySelectorAll('.bio-gif').forEach(function (el) {
         el.addEventListener('click', function () {
