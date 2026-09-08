@@ -301,12 +301,26 @@ p { margin: 0 0 1em; }
 }
 .hero .bio-gifs figure { margin: 0; }
 .hero .bio-gifs figcaption,
-.hero .bio-gif-wide figcaption {
+.hero .bio-gif-wide figcaption,
+.hero .bio-video figcaption {
   margin-top: 6px;
   font-size: 12px;
   color: #888;
   text-align: center;
   line-height: 1.4;
+}
+
+/* Third-party clip in the bio (preload=metadata, so it costs ~nothing until played) */
+.hero .bio-video {
+  margin: 22px auto 6px;
+  max-width: 480px;
+}
+.hero .bio-video video {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+  background: #0e0e0e;
 }
 
 .hero .bio-gif-wide {
