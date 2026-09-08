@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Squirrel Turret &mdash; Nathaniel Moore Glaser</title>
+  <meta name="description" content="A camera-guided pan/tilt water turret that detects squirrels in the backyard and sprays them. Build notes and clips.">
+  <link rel="stylesheet" href="../../assets/style.css">
+  <style>
+    .post { max-width: 760px; margin: 0 auto; }
+    .post .back { font-size: 13px; color: #2874a6; display: inline-block; margin-bottom: 18px; }
+    .post .post-meta { font-size: 13px; color: #888; margin: 0 0 4px; }
+    .post .post-meta .venue { color: #2874a6; font-weight: 700; }
+    .post h1 { margin: 6px 0 18px; }
+    .post h2 { font-size: 19px; margin: 44px 0 10px; }
+    .post p { font-size: 15px; line-height: 1.7; color: #444; }
+    .post .wip {
+      border-left: 3px solid #c0392b;
+      background: #fbf4f3;
+      padding: 10px 14px;
+      margin: 0 0 26px;
+      font-size: 14px;
+      line-height: 1.6;
+      color: #555;
+    }
+    .post .wip strong { color: #c0392b; }
+    .post ul { font-size: 15px; line-height: 1.7; color: #444; padding-left: 20px; }
+    .post li { margin-bottom: 7px; }
+
+    figure.clip { margin: 0 0 26px; }
+    figure.clip video {
+      width: 100%;
+      height: auto;
+      display: block;
+      background: #0e0e0e;
+      border: 1px solid #e4e4e4;
+      border-radius: 3px;
+    }
+    figure.clip figcaption {
+      font-size: 13px;
+      color: #888;
+      line-height: 1.6;
+      margin-top: 7px;
+    }
+    figure.clip figcaption b { color: #555; font-weight: 600; }
+
+    .clip-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 22px;
+      margin-bottom: 26px;
+    }
+    .clip-grid figure.clip { margin: 0; }
+    @media (max-width: 640px) {
+      .clip-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="navbar">Nathaniel Moore Glaser</div>
+
+  <div class="wrap">
+    <div class="post">
+
+      <a class="back" href="../../">&larr; Back</a>
+
+      <p class="post-meta"><span class="venue">Blog</span> &middot; September 2026</p>
+      <h1>Squirrel turret</h1>
+
+      <p class="wip"><strong>Placeholder.</strong> Posting the clips first &mdash; the real write-up
+      (calibration procedure, detector training, the failure modes) is still to come.</p>
+
+      <p>The squirrels dig up the mulch bed. So: a pan/tilt water turret that watches the yard,
+      decides whether the thing moving out there is a squirrel, and points a hose at it.</p>
+
+      <p>The build splits cleanly into two halves that turned out to be almost independent problems.
+      <b>Detection</b> &mdash; given a camera frame, is there a squirrel in it, and where? &mdash; runs on a
+      Raspberry Pi off a fixed camera's infrared stream: a cheap motion gate proposes regions, and a
+      small trained image classifier decides whether each crop is actually a squirrel.
+      <b>Aiming</b> &mdash; given a target location in the image, where do the servos need to point? &mdash; is
+      the part that had a nice shortcut.</p>
+
+      <h2>The aiming shortcut</h2>
+
+      <p>The obvious approach is to solve it properly: recover depth from the camera, work out the
+      camera-to-turret transform, then model the water's trajectory to get pump pressure sag and
+      droplet drag right. Three hard calibrations, each with its own failure modes, multiplied together.</p>
+
+      <p>But the camera never moves. Which means a pixel <em>already</em> encodes a ground location &mdash;
+      so the whole chain collapses into a single empirical lookup table: <code>pixel &rarr; pan/tilt servo
+      command</code>. You walk a grid of image cells, jog the turret until the water lands in each one,
+      and record the command. The table <em>is</em> the calibration. No depth in the runtime path, no
+      camera-to-turret geometry, no ballistics model &mdash; the pressure sag and the drag are just
+      baked into the numbers you recorded.</p>
+
+      <p>The catch is that the table is only valid for the ground plane it was calibrated against,
+      so detection has to aim at the target's feet rather than its centroid. A separate geometric
+      solve still exists as a fallback and as an independent sanity check that the table's numbers
+      are physically plausible.</p>
+
+      <h2>It works</h2>
+
+      <figure class="clip">
+        <video controls playsinline preload="metadata" muted
+               poster="_assets/hit-overhead.jpg"
+               aria-label="Overhead security camera: a squirrel in the mulch bed is hit by a water stream and leaves">
+          <source src="_assets/hit-overhead.mp4" type="video/mp4">
+        </video>
+        <figcaption><b>Overhead view, from the yard security camera.</b> A squirrel is sitting in the
+        mulch bed at left. The stream sweeps onto it, and it leaves. This is the clip the whole project
+        was for.</figcaption>
+      </figure>
+
+      <h2>Firing, from ground level</h2>
+
+      <p>The same events from a camera down at turret height &mdash; useful for eyeballing whether the
+      stream is going where the table said it would.</p>
+
+      <div class="clip-grid">
+        <figure class="clip">
+          <video controls playsinline preload="metadata" muted poster="_assets/fire-1.jpg">
+            <source src="_assets/fire-1.mp4" type="video/mp4">
+          </video>
+          <figcaption>Turret firing across the gravel toward the mulch bed.</figcaption>
+        </figure>
+
+        <figure class="clip">
+          <video controls playsinline preload="metadata" muted poster="_assets/fire-2.jpg">
+            <source src="_assets/fire-2.mp4" type="video/mp4">
+          </video>
+          <figcaption>A flatter shot &mdash; note how far the stream carries.</figcaption>
+        </figure>
+
+        <figure class="clip">
+          <video controls playsinline preload="metadata" muted poster="_assets/fire-3.jpg">
+            <source src="_assets/fire-3.mp4" type="video/mp4">
+          </video>
+          <figcaption>Another pass across the same bed.</figcaption>
+        </figure>
+
+        <figure class="clip">
+          <video controls playsinline preload="metadata" muted poster="_assets/fire-4.jpg">
+            <source src="_assets/fire-4.mp4" type="video/mp4">
+          </video>
+          <figcaption>Evening light, longer arc.</figcaption>
+        </figure>
+      </div>
+
+      <h2>What the detector sees</h2>
+
+      <figure class="clip">
+        <video controls playsinline preload="metadata" muted
+               poster="_assets/detect-ir.jpg"
+               aria-label="Infrared camera view of the yard, the stream the squirrel detector runs on">
+          <source src="_assets/detect-ir.mp4" type="video/mp4">
+        </video>
+        <figcaption><b>The infrared stream the detector actually runs on.</b> No color, which rules
+        out any detection trick that leans on it &mdash; and is why detection is a trained classifier
+        rather than a color threshold.</figcaption>
+      </figure>
+
+      <h2>Safety</h2>
+
+      <p>Two independent layers, on purpose. Software pan/tilt limits are enforced on every aim
+      command, set so the turret physically cannot point at the house or the street. And the fire
+      path refuses to trigger unless a hardware dead-man switch is active. Neither one is allowed to
+      be the only thing standing between a bug and a hose pointed somewhere it shouldn't be.</p>
+
+      <h2>Still open</h2>
+
+      <ul>
+        <li>Detection and aiming are separate codebases and aren't fully integrated yet.</li>
+        <li>The classifier needs far more real yard footage &mdash; birds and shadows are the interesting
+        false positives.</li>
+        <li>Splash detection to auto-correct the lookup table, so recalibration stops being a manual grid walk.</li>
+        <li>Leading a moving target, rather than firing where it currently is.</li>
+      </ul>
+
+    </div>
+  </div>
+
+  <footer>
+    <a href="../../">Nathaniel Moore Glaser</a>
+  </footer>
+
+</body>
+</html>
