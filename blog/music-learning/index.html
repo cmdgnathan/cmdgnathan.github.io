@@ -901,6 +901,12 @@
             </div>
           </div>
         </div>
+        <button type="button" class="finding-tile" aria-controls="detail-f2-5">Growing the token vocabulary mirrors how a pianist builds one</button>
+        <div class="tile-detail" id="detail-f2-5" hidden>
+          <p class="equation-gloss" style="margin-bottom:0.6rem;">The vocabulary sizes above aren&rsquo;t arbitrary settings &mdash; they trace a progression. BPE starts from single notes and repeatedly merges whichever pair it sees most often, so the vocabulary grows from individual pitches into recurring intervals, then chords, then whole phrases. Each merge turns something the model used to spell out note by note into one unit it can reach for directly.</p>
+          <p class="equation-gloss" style="margin-bottom:0.6rem;">That is close to how people actually learn piano. You begin note by note, but scales, chord shapes and cadences soon stop being sequences you assemble and become single things your hands already know. The vocabulary you&rsquo;ve built is what sits ready at your fingertips &mdash; and it&rsquo;s precisely what makes a harder piece playable, because you&rsquo;re placing familiar shapes rather than spelling out every note.</p>
+          <p class="equation-gloss">The model gets the same benefit for the same reason. A token carrying a whole chord or phrase is one decision instead of several, so a fixed context window reaches further back in musical time and more of the model&rsquo;s capacity goes to shaping the music rather than spelling it. It also explains the direction of the clips above: too few merges and the model is stuck spelling everything out from coarse categories, which is exactly what the simpler, blockier output sounds like.</p>
+        </div>
       </div>
     </div>
   </details>
