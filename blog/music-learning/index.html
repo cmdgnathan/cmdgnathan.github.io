@@ -254,6 +254,41 @@
   @media (max-width: 720px) {
     .playbook-frame-wrap iframe { height: min(170vh, 1400px); }
   }
+
+  /* clickable piano-roll thumbnails (composer motif grid) */
+  .roll-cell-wrap { display: flex; flex-direction: column; gap: 0.25rem; }
+  .roll-cell {
+    position: relative; display: block; width: 100%; padding: 0;
+    border: 1px solid var(--line); border-radius: 8px; overflow: hidden;
+    background: var(--surface); cursor: pointer; line-height: 0;
+    transition: border-color .15s, box-shadow .15s;
+  }
+  .roll-cell img { width: 100%; height: auto; display: block; }
+  .roll-cell:hover { border-color: var(--accent); }
+  .roll-cell.playing {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px var(--accent-soft-bg, rgba(216,166,60,0.25));
+  }
+  .roll-cell .roll-head {
+    position: absolute; top: 0; bottom: 0; width: 2px; left: 0;
+    background: var(--pr-playhead, #C23B3B); pointer-events: none;
+  }
+  .roll-cell .roll-play {
+    position: absolute; top: 50%; left: 50%; width: 30px; height: 30px;
+    transform: translate(-50%, -50%); border-radius: 50%;
+    background: rgba(0,0,0,0.45); pointer-events: none; transition: opacity .15s;
+  }
+  .roll-cell .roll-play::after {
+    content: ''; position: absolute; top: 50%; left: 52%;
+    transform: translate(-50%, -50%);
+    border: 6px solid transparent; border-left: 10px solid #fff;
+  }
+  .roll-cell:hover .roll-play { opacity: 0.35; }
+  .roll-cell.playing .roll-play { opacity: 0; }
+  .roll-step {
+    margin: 0; font-size: 0.62rem; color: var(--ink-soft);
+    text-align: center; line-height: 1.2;
+  }
 </style>
 
 <div class="wrap">
@@ -1194,21 +1229,21 @@
         <div class="tile-detail" id="detail-f3-10" hidden>
           <p class="equation-gloss">Each composer&rsquo;s fine-tuned LoRA checkpoint, at three points along a training-amount progression well past the original 400-step budget, continuing Beethoven&rsquo;s actual G-G-G-E&#9837;4 motif. Click any cell to hear it.</p>
           <div style="margin-top:0.8rem;overflow-x:auto;">
-            <div style="display:grid;grid-template-columns:100px repeat(3,150px);gap:0.5rem;margin-bottom:0.4rem;">
+            <div style="display:grid;grid-template-columns:110px repeat(3,1fr);gap:0.5rem;margin-bottom:0.4rem;">
               <div></div>
               <p style="margin:0;text-align:center;font-size:0.68rem;text-transform:uppercase;letter-spacing:0.04em;color:var(--ink-soft);">Optimum</p>
               <p style="margin:0;text-align:center;font-size:0.68rem;text-transform:uppercase;letter-spacing:0.04em;color:var(--ink-soft);">2&times;</p>
               <p style="margin:0;text-align:center;font-size:0.68rem;text-transform:uppercase;letter-spacing:0.04em;color:var(--ink-soft);">Final</p>
             </div>
-            <div style="display:grid;grid-template-columns:100px repeat(3,150px);gap:0.5rem;align-items:center;margin-bottom:0.5rem;"><p style="margin:0;font-weight:600;font-size:0.85rem;">Beethoven</p><div style="background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:0.7rem 0.6rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.2rem;min-height:44px;"><p style="margin:0;font-size:0.62rem;color:var(--ink-soft);text-align:center;line-height:1.2;">step 2,700</p><audio controls preload="none" style="width:100%;height:32px;" src="_audio/3cd7a7de1502.mp3"><title>step 2,700 &middot; 32 notes &middot; 8.6s &middot; val_loss=2.315</title></audio></div>
-              <div style="background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:0.7rem 0.6rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.2rem;min-height:44px;"><p style="margin:0;font-size:0.62rem;color:var(--ink-soft);text-align:center;line-height:1.2;">step 5,400</p><audio controls preload="none" style="width:100%;height:32px;" src="_audio/170253000dbd.mp3"><title>step 5,400 &middot; 31 notes &middot; 8.1s &middot; val_loss=2.306</title></audio></div>
-              <div style="background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:0.7rem 0.6rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.2rem;min-height:44px;"><p style="margin:0;font-size:0.62rem;color:var(--ink-soft);text-align:center;line-height:1.2;">step 8,100</p><audio controls preload="none" style="width:100%;height:32px;" src="_audio/3daca93bb91c.mp3"><title>step 8,100 &middot; 31 notes &middot; 9.4s &middot; val_loss=2.277</title></audio></div></div>
-            <div style="display:grid;grid-template-columns:100px repeat(3,150px);gap:0.5rem;align-items:center;margin-bottom:0.5rem;"><p style="margin:0;font-weight:600;font-size:0.85rem;">Mozart</p><div style="background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:0.7rem 0.6rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.2rem;min-height:44px;"><p style="margin:0;font-size:0.62rem;color:var(--ink-soft);text-align:center;line-height:1.2;">step 2,375</p><audio controls preload="none" style="width:100%;height:32px;" src="_audio/5f10f5124a13.mp3"><title>step 2,375 &middot; 33 notes &middot; 4.5s &middot; val_loss=2.162</title></audio></div>
-              <div style="background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:0.7rem 0.6rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.2rem;min-height:44px;"><p style="margin:0;font-size:0.62rem;color:var(--ink-soft);text-align:center;line-height:1.2;">step 4,750</p><audio controls preload="none" style="width:100%;height:32px;" src="_audio/047bbf8f23f2.mp3"><title>step 4,750 &middot; 32 notes &middot; 6.5s &middot; val_loss=2.209</title></audio></div>
-              <div style="background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:0.7rem 0.6rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.2rem;min-height:44px;"><p style="margin:0;font-size:0.62rem;color:var(--ink-soft);text-align:center;line-height:1.2;">step 7,125</p><audio controls preload="none" style="width:100%;height:32px;" src="_audio/fce7285a0b40.mp3"><title>step 7,125 &middot; 34 notes &middot; 3.9s &middot; val_loss=2.123</title></audio></div></div>
-            <div style="display:grid;grid-template-columns:100px repeat(3,150px);gap:0.5rem;align-items:center;margin-bottom:0.5rem;"><p style="margin:0;font-weight:600;font-size:0.85rem;">Bach</p><div style="background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:0.7rem 0.6rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.2rem;min-height:44px;"><p style="margin:0;font-size:0.62rem;color:var(--ink-soft);text-align:center;line-height:1.2;">step 1,375</p><audio controls preload="none" style="width:100%;height:32px;" src="_audio/87028b4d44e5.mp3"><title>step 1,375 &middot; 32 notes &middot; 6.3s &middot; val_loss=1.551</title></audio></div>
-              <div style="background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:0.7rem 0.6rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.2rem;min-height:44px;"><p style="margin:0;font-size:0.62rem;color:var(--ink-soft);text-align:center;line-height:1.2;">step 2,750</p><audio controls preload="none" style="width:100%;height:32px;" src="_audio/d2ad6653c907.mp3"><title>step 2,750 &middot; 33 notes &middot; 5.2s &middot; val_loss=1.913</title></audio></div>
-              <div style="background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:0.7rem 0.6rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.2rem;min-height:44px;"><p style="margin:0;font-size:0.62rem;color:var(--ink-soft);text-align:center;line-height:1.2;">step 4,125</p><audio controls preload="none" style="width:100%;height:32px;" src="_audio/ec004f063f9a.mp3"><title>step 4,125 &middot; 33 notes &middot; 11.8s &middot; val_loss=1.597</title></audio></div></div>
+            <div style="display:grid;grid-template-columns:110px repeat(3,1fr);gap:0.5rem;align-items:center;margin-bottom:0.5rem;"><p style="margin:0;font-weight:600;font-size:0.85rem;">Beethoven</p><div class="roll-cell-wrap"><button type="button" class="roll-cell" data-src="_audio/3cd7a7de1502.mp3" aria-label="Play step 2,700 · step 2,700 &middot; 32 notes &middot; 8.6s &middot; val_loss=2.315"><img src="_rolls/3cd7a7de1502.png" alt="" loading="lazy" decoding="async"><span class="roll-head" hidden></span><span class="roll-play" aria-hidden="true"></span></button><p class="roll-step">step 2,700</p></div>
+              <div class="roll-cell-wrap"><button type="button" class="roll-cell" data-src="_audio/170253000dbd.mp3" aria-label="Play step 5,400 · step 5,400 &middot; 31 notes &middot; 8.1s &middot; val_loss=2.306"><img src="_rolls/170253000dbd.png" alt="" loading="lazy" decoding="async"><span class="roll-head" hidden></span><span class="roll-play" aria-hidden="true"></span></button><p class="roll-step">step 5,400</p></div>
+              <div class="roll-cell-wrap"><button type="button" class="roll-cell" data-src="_audio/3daca93bb91c.mp3" aria-label="Play step 8,100 · step 8,100 &middot; 31 notes &middot; 9.4s &middot; val_loss=2.277"><img src="_rolls/3daca93bb91c.png" alt="" loading="lazy" decoding="async"><span class="roll-head" hidden></span><span class="roll-play" aria-hidden="true"></span></button><p class="roll-step">step 8,100</p></div></div>
+            <div style="display:grid;grid-template-columns:110px repeat(3,1fr);gap:0.5rem;align-items:center;margin-bottom:0.5rem;"><p style="margin:0;font-weight:600;font-size:0.85rem;">Mozart</p><div class="roll-cell-wrap"><button type="button" class="roll-cell" data-src="_audio/5f10f5124a13.mp3" aria-label="Play step 2,375 · step 2,375 &middot; 33 notes &middot; 4.5s &middot; val_loss=2.162"><img src="_rolls/5f10f5124a13.png" alt="" loading="lazy" decoding="async"><span class="roll-head" hidden></span><span class="roll-play" aria-hidden="true"></span></button><p class="roll-step">step 2,375</p></div>
+              <div class="roll-cell-wrap"><button type="button" class="roll-cell" data-src="_audio/047bbf8f23f2.mp3" aria-label="Play step 4,750 · step 4,750 &middot; 32 notes &middot; 6.5s &middot; val_loss=2.209"><img src="_rolls/047bbf8f23f2.png" alt="" loading="lazy" decoding="async"><span class="roll-head" hidden></span><span class="roll-play" aria-hidden="true"></span></button><p class="roll-step">step 4,750</p></div>
+              <div class="roll-cell-wrap"><button type="button" class="roll-cell" data-src="_audio/fce7285a0b40.mp3" aria-label="Play step 7,125 · step 7,125 &middot; 34 notes &middot; 3.9s &middot; val_loss=2.123"><img src="_rolls/fce7285a0b40.png" alt="" loading="lazy" decoding="async"><span class="roll-head" hidden></span><span class="roll-play" aria-hidden="true"></span></button><p class="roll-step">step 7,125</p></div></div>
+            <div style="display:grid;grid-template-columns:110px repeat(3,1fr);gap:0.5rem;align-items:center;margin-bottom:0.5rem;"><p style="margin:0;font-weight:600;font-size:0.85rem;">Bach</p><div class="roll-cell-wrap"><button type="button" class="roll-cell" data-src="_audio/87028b4d44e5.mp3" aria-label="Play step 1,375 · step 1,375 &middot; 32 notes &middot; 6.3s &middot; val_loss=1.551"><img src="_rolls/87028b4d44e5.png" alt="" loading="lazy" decoding="async"><span class="roll-head" hidden></span><span class="roll-play" aria-hidden="true"></span></button><p class="roll-step">step 1,375</p></div>
+              <div class="roll-cell-wrap"><button type="button" class="roll-cell" data-src="_audio/d2ad6653c907.mp3" aria-label="Play step 2,750 · step 2,750 &middot; 33 notes &middot; 5.2s &middot; val_loss=1.913"><img src="_rolls/d2ad6653c907.png" alt="" loading="lazy" decoding="async"><span class="roll-head" hidden></span><span class="roll-play" aria-hidden="true"></span></button><p class="roll-step">step 2,750</p></div>
+              <div class="roll-cell-wrap"><button type="button" class="roll-cell" data-src="_audio/ec004f063f9a.mp3" aria-label="Play step 4,125 · step 4,125 &middot; 33 notes &middot; 11.8s &middot; val_loss=1.597"><img src="_rolls/ec004f063f9a.png" alt="" loading="lazy" decoding="async"><span class="roll-head" hidden></span><span class="roll-play" aria-hidden="true"></span></button><p class="roll-step">step 4,125</p></div></div>
           </div>
           <p class="row-label" style="font-size:0.72rem;text-transform:uppercase;letter-spacing:0.05em;margin:1.1rem 0 0.3rem;">More composers, at their own true val-loss optimum</p>
           <p class="equation-gloss" style="margin-bottom:0.6rem;">A different, simpler comparison than the grid above &mdash; each composer&rsquo;s own true best step from a dense val-loss sweep, not a matched long-schedule progression, so only 2 checkpoints exist here rather than 3.</p>
@@ -1218,14 +1253,14 @@
               <p style="margin:0;text-align:center;font-size:0.68rem;text-transform:uppercase;letter-spacing:0.04em;color:var(--ink-soft);">400 steps</p>
               <p style="margin:0;text-align:center;font-size:0.68rem;text-transform:uppercase;letter-spacing:0.04em;color:var(--ink-soft);">Val-loss optimum</p>
             </div>
-            <div style="display:grid;grid-template-columns:100px repeat(2,160px);gap:0.5rem;align-items:center;margin-bottom:0.5rem;"><p style="margin:0;font-weight:600;font-size:0.85rem;">Haydn</p><div style="background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:0.7rem 0.6rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.2rem;min-height:44px;"><p style="margin:0;font-size:0.62rem;color:var(--ink-soft);text-align:center;line-height:1.2;">400 steps</p><audio controls preload="none" style="width:100%;height:32px;" src="_audio/a740ec4e994c.mp3"><title>400 steps &middot; 32 notes &middot; 7.2s</title></audio></div>
-              <div style="background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:0.7rem 0.6rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.2rem;min-height:44px;"><p style="margin:0;font-size:0.62rem;color:var(--ink-soft);text-align:center;line-height:1.2;">Val-loss optimum, step 376</p><audio controls preload="none" style="width:100%;height:32px;" src="_audio/744c4a692c11.mp3"><title>Val-loss optimum, step 376 &middot; 32 notes &middot; 8.8s</title></audio></div></div>
-            <div style="display:grid;grid-template-columns:100px repeat(2,160px);gap:0.5rem;align-items:center;margin-bottom:0.5rem;"><p style="margin:0;font-weight:600;font-size:0.85rem;">Handel</p><div style="background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:0.7rem 0.6rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.2rem;min-height:44px;"><p style="margin:0;font-size:0.62rem;color:var(--ink-soft);text-align:center;line-height:1.2;">400 steps</p><audio controls preload="none" style="width:100%;height:32px;" src="_audio/376c43828c8e.mp3"><title>400 steps &middot; 32 notes &middot; 8.6s</title></audio></div>
-              <div style="background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:0.7rem 0.6rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.2rem;min-height:44px;"><p style="margin:0;font-size:0.62rem;color:var(--ink-soft);text-align:center;line-height:1.2;">Val-loss optimum, step 1,401</p><audio controls preload="none" style="width:100%;height:32px;" src="_audio/a362d1b276c5.mp3"><title>Val-loss optimum, step 1,401 &middot; 33 notes &middot; 5.2s</title></audio></div></div>
-            <div style="display:grid;grid-template-columns:100px repeat(2,160px);gap:0.5rem;align-items:center;margin-bottom:0.5rem;"><p style="margin:0;font-weight:600;font-size:0.85rem;">Scarlatti</p><div style="background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:0.7rem 0.6rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.2rem;min-height:44px;"><p style="margin:0;font-size:0.62rem;color:var(--ink-soft);text-align:center;line-height:1.2;">400 steps</p><audio controls preload="none" style="width:100%;height:32px;" src="_audio/277ccff0f317.mp3"><title>400 steps &middot; 33 notes &middot; 5.3s</title></audio></div>
-              <div style="background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:0.7rem 0.6rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.2rem;min-height:44px;"><p style="margin:0;font-size:0.62rem;color:var(--ink-soft);text-align:center;line-height:1.2;">Val-loss optimum, step 2,851</p><audio controls preload="none" style="width:100%;height:32px;" src="_audio/1965f4066665.mp3"><title>Val-loss optimum, step 2,851 &middot; 32 notes &middot; 5.5s</title></audio></div></div>
-            <div style="display:grid;grid-template-columns:100px repeat(2,160px);gap:0.5rem;align-items:center;margin-bottom:0.5rem;"><p style="margin:0;font-weight:600;font-size:0.85rem;">C.P.E. Bach</p><div style="background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:0.7rem 0.6rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.2rem;min-height:44px;"><p style="margin:0;font-size:0.62rem;color:var(--ink-soft);text-align:center;line-height:1.2;">400 steps</p><audio controls preload="none" style="width:100%;height:32px;" src="_audio/176f5fb9c034.mp3"><title>400 steps &middot; 32 notes &middot; 8.8s</title></audio></div>
-              <div style="background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:0.7rem 0.6rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.2rem;min-height:44px;"><p style="margin:0;font-size:0.62rem;color:var(--ink-soft);text-align:center;line-height:1.2;">Val-loss optimum, step 476</p><audio controls preload="none" style="width:100%;height:32px;" src="_audio/aa6c55e0c7fe.mp3"><title>Val-loss optimum, step 476 &middot; 32 notes &middot; 8.8s</title></audio></div></div>
+            <div style="display:grid;grid-template-columns:100px repeat(2,160px);gap:0.5rem;align-items:center;margin-bottom:0.5rem;"><p style="margin:0;font-weight:600;font-size:0.85rem;">Haydn</p><div class="roll-cell-wrap"><button type="button" class="roll-cell" data-src="_audio/a740ec4e994c.mp3" aria-label="Play 400 steps · 400 steps &middot; 32 notes &middot; 7.2s"><img src="_rolls/a740ec4e994c.png" alt="" loading="lazy" decoding="async"><span class="roll-head" hidden></span><span class="roll-play" aria-hidden="true"></span></button><p class="roll-step">400 steps</p></div>
+              <div class="roll-cell-wrap"><button type="button" class="roll-cell" data-src="_audio/744c4a692c11.mp3" aria-label="Play Val-loss optimum, step 376 · Val-loss optimum, step 376 &middot; 32 notes &middot; 8.8s"><img src="_rolls/744c4a692c11.png" alt="" loading="lazy" decoding="async"><span class="roll-head" hidden></span><span class="roll-play" aria-hidden="true"></span></button><p class="roll-step">Val-loss optimum, step 376</p></div></div>
+            <div style="display:grid;grid-template-columns:100px repeat(2,160px);gap:0.5rem;align-items:center;margin-bottom:0.5rem;"><p style="margin:0;font-weight:600;font-size:0.85rem;">Handel</p><div class="roll-cell-wrap"><button type="button" class="roll-cell" data-src="_audio/376c43828c8e.mp3" aria-label="Play 400 steps · 400 steps &middot; 32 notes &middot; 8.6s"><img src="_rolls/376c43828c8e.png" alt="" loading="lazy" decoding="async"><span class="roll-head" hidden></span><span class="roll-play" aria-hidden="true"></span></button><p class="roll-step">400 steps</p></div>
+              <div class="roll-cell-wrap"><button type="button" class="roll-cell" data-src="_audio/a362d1b276c5.mp3" aria-label="Play Val-loss optimum, step 1,401 · Val-loss optimum, step 1,401 &middot; 33 notes &middot; 5.2s"><img src="_rolls/a362d1b276c5.png" alt="" loading="lazy" decoding="async"><span class="roll-head" hidden></span><span class="roll-play" aria-hidden="true"></span></button><p class="roll-step">Val-loss optimum, step 1,401</p></div></div>
+            <div style="display:grid;grid-template-columns:100px repeat(2,160px);gap:0.5rem;align-items:center;margin-bottom:0.5rem;"><p style="margin:0;font-weight:600;font-size:0.85rem;">Scarlatti</p><div class="roll-cell-wrap"><button type="button" class="roll-cell" data-src="_audio/277ccff0f317.mp3" aria-label="Play 400 steps · 400 steps &middot; 33 notes &middot; 5.3s"><img src="_rolls/277ccff0f317.png" alt="" loading="lazy" decoding="async"><span class="roll-head" hidden></span><span class="roll-play" aria-hidden="true"></span></button><p class="roll-step">400 steps</p></div>
+              <div class="roll-cell-wrap"><button type="button" class="roll-cell" data-src="_audio/1965f4066665.mp3" aria-label="Play Val-loss optimum, step 2,851 · Val-loss optimum, step 2,851 &middot; 32 notes &middot; 5.5s"><img src="_rolls/1965f4066665.png" alt="" loading="lazy" decoding="async"><span class="roll-head" hidden></span><span class="roll-play" aria-hidden="true"></span></button><p class="roll-step">Val-loss optimum, step 2,851</p></div></div>
+            <div style="display:grid;grid-template-columns:100px repeat(2,160px);gap:0.5rem;align-items:center;margin-bottom:0.5rem;"><p style="margin:0;font-weight:600;font-size:0.85rem;">C.P.E. Bach</p><div class="roll-cell-wrap"><button type="button" class="roll-cell" data-src="_audio/176f5fb9c034.mp3" aria-label="Play 400 steps · 400 steps &middot; 32 notes &middot; 8.8s"><img src="_rolls/176f5fb9c034.png" alt="" loading="lazy" decoding="async"><span class="roll-head" hidden></span><span class="roll-play" aria-hidden="true"></span></button><p class="roll-step">400 steps</p></div>
+              <div class="roll-cell-wrap"><button type="button" class="roll-cell" data-src="_audio/aa6c55e0c7fe.mp3" aria-label="Play Val-loss optimum, step 476 · Val-loss optimum, step 476 &middot; 32 notes &middot; 8.8s"><img src="_rolls/aa6c55e0c7fe.png" alt="" loading="lazy" decoding="async"><span class="roll-head" hidden></span><span class="roll-play" aria-hidden="true"></span></button><p class="roll-step">Val-loss optimum, step 476</p></div></div>
           </div>
           <p class="equation-gloss" style="margin-top:0.8rem;">Val_loss isn&rsquo;t directly comparable across composers &mdash; hover any cell for its val_loss, shown as a training-progress marker, not a cross-cell ranking.</p>
         </div>
@@ -2806,7 +2841,64 @@
     // also cover a direct #playbook deep link
     if (location.hash === '#playbook') load();
   })();
-</script>
+
+  (function () {
+    // Finding panels are cloned into a modal, so bind by delegation rather than
+    // to the nodes present at load.
+    var pool = {}, current = null, raf = 0;
+
+    function audioFor(src) {
+      if (!pool[src]) {
+        var a = new Audio();
+        a.preload = 'none';
+        a.src = src;
+        a.addEventListener('ended', stop);
+        pool[src] = a;
+      }
+      return pool[src];
+    }
+    function stop() {
+      if (raf) { cancelAnimationFrame(raf); raf = 0; }
+      if (current) {
+        current.audio.pause();
+        current.btn.classList.remove('playing');
+        if (current.head) current.head.hidden = true;
+        current = null;
+      }
+    }
+    function tick() {
+      if (!current) return;
+      var a = current.audio;
+      if (a.duration && current.head) {
+        current.head.style.left =
+          (100 * Math.min(a.currentTime / a.duration, 1)) + '%';
+      }
+      raf = requestAnimationFrame(tick);
+    }
+    document.addEventListener('click', function (e) {
+      var btn = e.target.closest ? e.target.closest('.roll-cell') : null;
+      if (!btn) return;
+      e.preventDefault();
+      var src = btn.dataset.src;
+      var wasSame = current && current.btn === btn;
+      stop();
+      if (wasSame) return;
+      var audio = audioFor(src);
+      var head = btn.querySelector('.roll-head');
+      current = { btn: btn, audio: audio, head: head };
+      btn.classList.add('playing');
+      if (head) { head.hidden = false; head.style.left = '0%'; }
+      try { audio.currentTime = 0; } catch (err) {}
+      audio.play();
+      raf = requestAnimationFrame(tick);
+    });
+    // closing the evidence modal should stop playback
+    document.addEventListener('click', function (e) {
+      if (e.target.closest && (e.target.closest('.evidence-close') ||
+          e.target.closest('.evidence-backdrop'))) stop();
+    });
+  })();
+  </script>
 
 </body>
 </html>
